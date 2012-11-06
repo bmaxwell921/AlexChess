@@ -1,0 +1,47 @@
+Basic Rundown of how the game works:
+	1) Run the application
+	2) Decide whether to load a saved game or start a new one
+	3) If Load then we pull the current game from the server and 
+		either make our move if it's our turn or wait
+	4) After making our move push the new game board/move to the server 
+		so the other person has it	
+
+Special Notes:
+	-Keep in mind that right now the board starts with position 0,0 at the 
+		top left spot. Run the Main class and press New Game to see what I mean.
+		This will need to change since we want the perspective to change for each
+		player.
+
+Both Tasks:
+	-Find images for the ChessPieces/Board
+	-Fill in map of image locations (ClassToIconUtil). DW if you don't understand Alex, I'll
+		show you what's up
+
+Alex's Tasks (Roughly by priority):
+	-Implement each of the GamePiece classes (Bishop, King, Knight, Pawn, Queen, Rook)
+		-Look at the comments to figure out how each one of them works. The comments 
+			actually found in the ChessPiece class
+	-Implement the board class
+		-Comments should give a good idea of how everything works
+	-Add @author tags to the stuff you work on (Thats in the comment section above the
+		"public class ..." line
+	-If you're interested in the UI stuff feel free to look thru it, it starts in the Main class
+	
+Brandon's Tasks (Kinda by priority):
+	-Finish the UI
+		-Implement the StatisticsPanel
+		-Implement Stubbed methods
+		-Implement GameIOUtil
+		-Make sure pressing X button saves first (hold onto old location)
+		-Get everything sized well
+	-Finish the ChessGame class
+		-Currently nothing handles removing pieces and stuff, but this might be
+			done in the ChessPanel class	
+	-Finish design details
+		-How to serialize all the stuff for saving to the local file system
+	-Implement saving the game state and loading the game state			
+	-Implement server interactions
+		-Should just need a servlet to handle get and post requests and then
+			a Util or something to send get and post requests to the servlet
+		-Will need to add the GAE plugin
+		-Apache Commons most likely too, Maven?		
