@@ -23,7 +23,7 @@ public class Bishop extends ChessPiece {
 	
 	@Override
 	public String toString() {
-		//TODO Brandon adsfa
+		//TODO Brandon
 		return null;
 	}
 
