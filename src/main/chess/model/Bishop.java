@@ -20,5 +20,11 @@ public class Bishop extends ChessPiece {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public String toString() {
+		//TODO Brandon
+		return null;
+	}
 
 }
