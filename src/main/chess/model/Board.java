@@ -30,8 +30,7 @@ public class Board {
 	 * @return
 	 */
 	public ChessBlock[][] getBoard() {
-		//TODO
-		return null;
+		return board;
 	}
 	
 	public ChessPiece getPieceAt(Point location) {

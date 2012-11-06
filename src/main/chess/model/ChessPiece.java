@@ -11,6 +11,8 @@ public abstract class ChessPiece {
 	
 	public enum ColorEnum {BLACK, WHITE};
 	
+
+
 	//Piece's current location on board
 	private Point location;
 	
@@ -45,9 +47,20 @@ public abstract class ChessPiece {
 	 */
 	public abstract ChessPiece[] getAttackedPieces(Board b);
 	
+	public Point getLocation() {
+		return location;
+	}
+
+	public void setLocation(Point location) {
+		this.location = location;
+	}
+
+	public void setColor(ColorEnum color) {
+		this.color = color;
+	}
+	
 	public ColorEnum getColor() {
-		//TODO
-		return null;
+		return color;
 	}
 	
 	
