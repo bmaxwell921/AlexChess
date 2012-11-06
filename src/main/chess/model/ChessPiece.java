@@ -20,7 +20,8 @@ public abstract class ChessPiece {
 	private ColorEnum color;
 	
 	public ChessPiece(ColorEnum color, Point pos) {
-		//TODO
+		this.color = color;
+		this.location = pos;
 	}
 	
 	/**

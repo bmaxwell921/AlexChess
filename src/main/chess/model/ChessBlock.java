@@ -33,7 +33,9 @@ public class ChessBlock {
 	 * 					the location of this piece on the board
 	 */
 	public ChessBlock(ChessPiece piece, Point location, Color blockColor) {
-		// TODO
+		this.piece = piece;
+		this.location = location;
+		this.blockColor = blockColor;
 	}
 
 	public ChessPiece getPiece() {
