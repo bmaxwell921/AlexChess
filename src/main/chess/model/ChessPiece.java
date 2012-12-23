@@ -2,16 +2,22 @@ package main.chess.model;
 
 import java.awt.Point;
 
+import main.chess.common.Constants;
+
 /**
  * A class to hold all the information about a given chess piece
  * @author Brandon
  *
  */
-public abstract class ChessPiece {
+public abstract class ChessPiece implements Comparable<ChessPiece> {
 	
 	public enum ColorEnum {BLACK, WHITE};
 	
-
+	//Id for serializing and hashcode
+	private String id;
+	
+	//Value used (maybe) for ai and sorting
+	private int value;
 
 	//Piece's current location on board
 	private Point location;
@@ -19,9 +25,11 @@ public abstract class ChessPiece {
 	//Piece's color, black or white. If you don't understand Enums look it up or text me
 	private ColorEnum color;
 	
-	public ChessPiece(ColorEnum color, Point pos) {
+	public ChessPiece(ColorEnum color, Point pos, String id, int value) {
 		this.color = color;
 		this.location = pos;
+		this.id = ((color == ColorEnum.WHITE) ? Constants.WPRE : Constants.BPRE) + id;
+		this.value = value;
 	}
 	
 	/**
@@ -48,6 +56,31 @@ public abstract class ChessPiece {
 	 */
 	public abstract ChessPiece[] getAttackedPieces(Board b);
 	
+	@Override
+	public int hashCode() {
+		return id.hashCode();
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o == null) return false;
+		if (o.getClass() != this.getClass()) return false;
+		
+		ChessPiece otherPiece = (ChessPiece) o;
+		
+		return otherPiece.hashCode() == this.hashCode();
+	}
+	
+	@Override
+	public int compareTo(ChessPiece other) {
+		if (this.value != other.value) {
+			return this.value - other.value;
+		}
+		else {
+			return this.id.compareTo(other.id);
+		}
+	}
+	
 	public Point getLocation() {
 		return location;
 	}
@@ -64,7 +97,19 @@ public abstract class ChessPiece {
 		return color;
 	}
 	
+	public void setId(String id) {
+		this.id = id;
+	}
 	
+	public String getId() {
+		return this.id;
+	}
 	
-
+	public int getValue() {
+		return this.value;
+	}
+	
+	public void setValue(int value) {
+		this.value = value;
+	}
 }

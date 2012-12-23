@@ -1,6 +1,9 @@
 package main.chess.model;
 
+import java.awt.Color;
 import java.awt.Point;
+
+import main.chess.model.ChessPiece.ColorEnum;
 
 public class Board {
 
@@ -8,12 +11,26 @@ public class Board {
 	private final int WIDTH = 8;
 	
 	/**
-	 * The array reprsentation of the board
+	 * The array representation of the board
 	 */
 	private ChessBlock[][] board;
 	
 	public Board() {
 		board = new ChessBlock[HEIGHT][WIDTH];
+		
+		//Sets up the black and white squares
+		boolean curWhite = false;
+		boolean rowStartWhite = false;
+		for (int i = 0; i < HEIGHT; ++i) {
+			curWhite = rowStartWhite;
+			for (int j = 0; j < WIDTH; ++j) {
+				board[j][i] = new ChessBlock(
+						new Rook(ColorEnum.BLACK, new Point(i, j)), 
+						new Point(j, i), curWhite ? ColorEnum.WHITE : ColorEnum.BLACK);
+				curWhite = !curWhite;
+			}
+			rowStartWhite = !rowStartWhite;
+		}
 		
 		//TODO set up the pieces in their default locations
 	}
@@ -67,8 +84,7 @@ public class Board {
 	}
 	
 	public ChessBlock getBlock(Point loc) {
-		//TODO
-		return null;
+		return board[loc.y][loc.x];
 	}
 
 	public int getWidth() {

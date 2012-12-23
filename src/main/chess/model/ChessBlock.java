@@ -1,14 +1,15 @@
 package main.chess.model;
 
-import java.awt.Color;
 import java.awt.Point;
+
+import main.chess.model.ChessPiece.ColorEnum;
 
 /**
  * A class to box up a ChessPiece and a location on the board
  * @author Brandon
  *
  */
-public class ChessBlock {
+public class ChessBlock implements Comparable<ChessBlock> {
 
 	/**
 	 * The piece held in this block. If null then this block is empty
@@ -23,7 +24,7 @@ public class ChessBlock {
 	/**
 	 * The color of THIS block, not the color of the chess piece
 	 */
-	private Color blockColor;
+	private ColorEnum blockColor;
 	
 	/**
 	 * A constructor to set up this chess block
@@ -32,7 +33,7 @@ public class ChessBlock {
 	 * @param location
 	 * 					the location of this piece on the board
 	 */
-	public ChessBlock(ChessPiece piece, Point location, Color blockColor) {
+	public ChessBlock(ChessPiece piece, Point location, ColorEnum blockColor) {
 		this.piece = piece;
 		this.location = location;
 		this.blockColor = blockColor;
@@ -54,11 +55,24 @@ public class ChessBlock {
 		this.location = location;
 	}
 	
-	public Color getBlockColor() {
+	public ColorEnum getBlockColor() {
 		return blockColor;
 	}
 
-	public void setBlockColor(Color blockColor) {
+	public void setBlockColor(ColorEnum blockColor) {
 		this.blockColor = blockColor;
+	}
+
+	@Override
+	public int compareTo(ChessBlock o) {
+		if (this.getPiece() == null && o.getPiece() == null) {
+			return 0;
+		}
+		else if (this.getPiece() == null) {
+			return -1;
+		}
+		else {
+			return this.getPiece().compareTo(o.getPiece());
+		}
 	}
 }

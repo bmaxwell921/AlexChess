@@ -2,10 +2,12 @@ package main.chess.model;
 
 import java.awt.Point;
 
+import main.chess.common.Constants;
+
 public class Bishop extends ChessPiece {
 
 	public Bishop(ColorEnum color, Point pos) {
-		super(color, pos);
+		super(color, pos, Constants.BISHOP, Constants.BISHOPVAL);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -20,11 +22,4 @@ public class Bishop extends ChessPiece {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	@Override
-	public String toString() {
-		//TODO Brandon
-		return null;
-	}
-
 }

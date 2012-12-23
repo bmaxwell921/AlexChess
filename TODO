@@ -12,11 +12,6 @@ Special Notes:
 		This will need to change since we want the perspective to change for each
 		player.
 
-Both Tasks:
-	-Find images for the ChessPieces/Board
-	-Fill in map of image locations (ClassToIconUtil). DW if you don't understand Alex, I'll
-		show you what's up
-
 Alex's Tasks (Roughly by priority):
 	-Implement each of the GamePiece classes (Bishop, King, Knight, Pawn, Queen, Rook)
 		-Look at the comments to figure out how each one of them works. The comments 
@@ -29,14 +24,16 @@ Alex's Tasks (Roughly by priority):
 	
 Brandon's Tasks (Kinda by priority):
 	-Finish the UI
-		-Implement the StatisticsPanel
 		-Implement Stubbed methods
+			-Mostly logic stuff
+		-Images aren't resized correctly when you change the window size
 		-Implement GameIOUtil
 		-Make sure pressing X button saves first (hold onto old location)
 		-Get everything sized well
+		-Change the square color a bit so it's off black, otherwise the pieces
+			blend with the background
 	-Finish the ChessGame class
-		-Currently nothing handles removing pieces and stuff, but this might be
-			done in the ChessPanel class	
+		-Currently nothing handles removing pieces and stuff	
 	-Finish design details
 		-How to serialize all the stuff for saving to the local file system
 	-Implement saving the game state and loading the game state			

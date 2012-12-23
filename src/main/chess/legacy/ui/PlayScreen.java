@@ -1,19 +1,14 @@
-package main.chess.ui;
+package main.chess.legacy.ui;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.Container;
-import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 import main.chess.logic.ChessGame;
-import java.awt.GridLayout;
-import javax.swing.JLabel;
 
 public class PlayScreen extends JPanel implements ActionListener {
 
@@ -37,40 +32,17 @@ public class PlayScreen extends JPanel implements ActionListener {
 	 */
 	private ChessGame game;
 	
-	/**
-	 * Panel that holds the lost pieces for this game
-	 */
-	private StatisticsPanel statPanel;
-	
-	/**
-	 * This panel's parent. To be used to go back to the main menu
-	 */
-	private Container parent;
-	
-	public PlayScreen(ChessGame game, Container parent) {
+	public PlayScreen(ChessGame game) {
 		this.game = game;
 		
-		this.parent = parent;
-		
 		this.setLayout(new BorderLayout());
-		
-		JLabel l = new JLabel("Chess", SwingConstants.CENTER);
-		l.setFont(new Font("Lucida Grand", 0, 16));
-		this.add(l, BorderLayout.PAGE_START);
 		
 		this.setUpButtons();
 		
 		//ChessPanel holds the actual board of buttons to click
-		ChessPanel chessPanel = new ChessPanel(game);
-		GridLayout gridLayout = (GridLayout) chessPanel.getLayout();
-		gridLayout.setColumns(9);
-		gridLayout.setRows(0);
-		this.add(chessPanel, BorderLayout.CENTER);
+		this.add(new ChessPanel(game), BorderLayout.CENTER);
 		
 		//TODO Need to add a stats panel to the screen
-		statPanel = new StatisticsPanel();
-		
-		this.add(statPanel, BorderLayout.EAST);
 	}
 	
 	private void setUpButtons() {
@@ -119,9 +91,6 @@ public class PlayScreen extends JPanel implements ActionListener {
 
 	private void saveGame() {
 		// TODO Saves the state of the game to the given file
-		
-		CardLayout lay = (CardLayout) parent.getLayout();
-		lay.previous(parent);
 		
 	}
 

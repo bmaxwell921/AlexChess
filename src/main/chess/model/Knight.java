@@ -2,10 +2,12 @@ package main.chess.model;
 
 import java.awt.Point;
 
+import main.chess.common.Constants;
+
 public class Knight extends ChessPiece {
 
 	public Knight(ColorEnum color, Point pos) {
-		super(color, pos);
+		super(color, pos, Constants.KNIGHT, Constants.KNIGHTVAL);
 		// TODO Auto-generated constructor stub
 	}
 
