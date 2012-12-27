@@ -12,6 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import main.chess.logic.ChessGame;
+import main.chess.model.ChessBlock;
+import main.chess.player.ChessPlayer;
+
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 
@@ -61,7 +64,7 @@ public class PlayScreen extends JPanel implements ActionListener {
 		this.setUpButtons();
 		
 		//ChessPanel holds the actual board of buttons to click
-		ChessPanel chessPanel = new ChessPanel(game);
+		ChessPanel chessPanel = new ChessPanel(this, game);
 		GridLayout gridLayout = (GridLayout) chessPanel.getLayout();
 		gridLayout.setColumns(9);
 		gridLayout.setRows(0);
@@ -123,6 +126,10 @@ public class PlayScreen extends JPanel implements ActionListener {
 		CardLayout lay = (CardLayout) parent.getLayout();
 		lay.previous(parent);
 		
+	}
+	
+	public void addCapturedPiece(ChessPlayer lostPlayer, ChessBlock lostPiece) {
+		statPanel.addCapturedPiece(lostPlayer, lostPiece);
 	}
 
 }

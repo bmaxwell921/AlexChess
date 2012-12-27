@@ -43,7 +43,7 @@ public abstract class ChessPiece implements Comparable<ChessPiece> {
 	 * @return 
 	 * 			an array of points representing the locations on the board that can be moved to 
 	 */
-	public abstract Set<Point> getValidMoveLocations(Board b);
+	public abstract Set<Point> getMovePositions(Board b);
 	
 	/**
 	 * A method to get all the locations OF PIECES that this piece can attack at it's current location.
@@ -56,7 +56,7 @@ public abstract class ChessPiece implements Comparable<ChessPiece> {
 	 * 			a set of the positions of pieces that this piece can attack. Return an empty array if there
 	 * 			aren't any. This will NOT return any NullPieces
 	 */
-	public abstract Set<Point> getAttackedPieces(Board b);
+	public abstract Set<Point> getAttackPositions(Board b);
 	
 	@Override
 	public int hashCode() {

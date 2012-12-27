@@ -121,9 +121,9 @@ public class ChessGame {
 		return selectedPiece;
 	}
 	
-	public boolean moveSelectedPieceToLocation(int i, int j) {
-		if (selectedPiece == null) return false;
-		return board.movePiece(selectedPiece.getLocation(), new Point(j, i));	
+	public void moveSelectedPieceToLocation(Point p) {
+		if (selectedPiece == null || !this.canMoveTo(p)) return;
+		board.movePiece(selectedPiece.getLocation(), p);	
 	}
 	
 	/**
@@ -169,7 +169,7 @@ public class ChessGame {
 	public Set<Point> getSelectedPieceAttackPieces() {
 		Set<Point> pieces = new HashSet<Point>();
 		if (selectedPiece != null) {
-			pieces = selectedPiece.getAttackedPieces(board);
+			pieces = selectedPiece.getAttackPositions(board);
 		}
 		return pieces;
 	}
@@ -183,7 +183,7 @@ public class ChessGame {
 	public Set<Point> getSelectedPieceMoveLocations() {
 		Set<Point> locs = new HashSet<Point>();
 		if (selectedPiece != null) {
-			locs = selectedPiece.getValidMoveLocations(board);
+			locs = selectedPiece.getMovePositions(board);
 		}
 		return locs;
 	}
@@ -193,6 +193,46 @@ public class ChessGame {
 	 */
 	public void resetSelectedPiece() {
 		selectedPiece = null;		
+	}
+
+	/**
+	 * Method to check whether the selected piece can move to a certain location
+	 * @param newP
+	 * 				the point to move to
+	 * @return
+	 * 			whether or not the piece can move there
+	 */
+	public boolean canMoveTo(Point newP) {
+		//TODO may want to keep the set on hand so we don't recalculate it a lot
+		if (selectedPiece == null) return false;
+		return board.canMovePiece(selectedPiece.getLocation(), newP);
+	}
+	
+	/**
+	 * Method to move the selected piece from one position to another
+	 * @param p
+	 * 			the point to move to
+	 */
+	public void moveSelectedTo(Point p) {
+		// Moves the selected piece to the chosen location
+		board.movePiece(selectedPiece.getLocation(), p);
+	}
+	
+	/**
+	 * Method to check whether the selected piece can capture a piece at the given location
+	 * @param p
+	 * 			the postion to capture at
+	 * @return
+	 * 			whether or not the selected piece can capture at the given location
+	 */
+	public boolean canCaptureAt(Point p) {
+		if (selectedPiece == null) return false;
+		return board.willCapture(selectedPiece.getLocation(), p); 
+	}
+	
+	public ChessPiece capturePieceAt(Point p) {
+		if (selectedPiece == null || !canCaptureAt(p)) return null;
+		return board.capture(selectedPiece.getLocation(), p);		
 	}
 
 }

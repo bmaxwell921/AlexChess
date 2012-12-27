@@ -46,8 +46,14 @@ public class ChessPanel extends JPanel implements ActionListener {
 	 * The current state of the game
 	 */
 	private GameState state;
+	
+	/**
+	 * The panel that holds this panel. This is used to add stuff to the stat panel
+	 */
+	private PlayScreen parent;
 
-	public ChessPanel(ChessGame game) {
+	public ChessPanel(PlayScreen parent, ChessGame game) {
+		this.parent = parent;
 		this.game = game;
 		state = GameState.START;
 		this.setLayout(new GridLayout(game.getHeight(), game.getWidth()));
@@ -94,19 +100,35 @@ public class ChessPanel extends JPanel implements ActionListener {
 	}
 
 	private void updateSelectedPiece(ChessBoardButton b) {
+		// The point representation of the clicked button
 		Point newP = new Point(b.getJ(), b.getI());
 		if (state == GameState.RUN_HOLD_PIECE) {
 			this.resetOldSelected();
 		}
+		
+		// For selecting a new piece
 		if (game.canSelect(newP)) {
 			//If we already have a selected piece reset its stuff
 			game.setSelectedPiece(newP);
 			this.updateSelected();
 			state = GameState.RUN_HOLD_PIECE;
-		} else {
+		} 
+		// For moving to an empty square
+		else if (game.canMoveTo(newP)) {
+			game.moveSelectedPieceToLocation(newP);
 			game.resetSelectedPiece();
 			state = GameState.RUN_WAIT;
 		}
+		//For capturing a piece
+		else if (game.canCaptureAt(newP)) {
+			
+		}
+		//For anything else, ie an empty square that you can't move to or the original piece
+		else {
+			game.resetSelectedPiece();
+			state = GameState.RUN_WAIT;
+		}
+		repaint();
 	}
 
 	private void resetOldSelected() {

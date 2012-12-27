@@ -14,13 +14,13 @@ public class Rook extends ChessPiece {
 	}
 
 	@Override
-	public Set<Point> getValidMoveLocations(Board b) {
+	public Set<Point> getMovePositions(Board b) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Set<Point> getAttackedPieces(Board b) {
+	public Set<Point> getAttackPositions(Board b) {
 		// TODO Auto-generated method stub
 		return null;
 	}
