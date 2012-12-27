@@ -1,9 +1,8 @@
 package main.chess.model;
 
-import java.awt.Color;
 import java.awt.Point;
 
-import main.chess.model.ChessPiece.ColorEnum;
+import main.chess.common.Constants.ColorEnum;
 
 public class Board {
 
@@ -25,13 +24,16 @@ public class Board {
 			curWhite = rowStartWhite;
 			for (int j = 0; j < WIDTH; ++j) {
 				board[j][i] = new ChessBlock(
-						new Rook(ColorEnum.BLACK, new Point(i, j)), 
+						null, 
 						new Point(j, i), curWhite ? ColorEnum.WHITE : ColorEnum.BLACK);
 				curWhite = !curWhite;
 			}
 			rowStartWhite = !rowStartWhite;
 		}
-		
+		// For testing
+		board[HEIGHT/2][WIDTH/2] = new ChessBlock(
+				new Pawn(ColorEnum.WHITE, new Point(HEIGHT/2, WIDTH/2)), 
+				new Point(HEIGHT/2, WIDTH/2), ColorEnum.BLACK);
 		//TODO set up the pieces in their default locations
 	}
 	

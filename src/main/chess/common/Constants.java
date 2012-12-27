@@ -7,10 +7,18 @@ public class Constants {
 	
 	public static final String PLAYSCREEN = "Screen for playing the game";
 	
+	//Enums
+	public enum Tile {WHITE, BLACK, ATTACK, MOVE, HOLD};
+	public enum GameState {START, RUN_WAIT, RUN_HOLD_PIECE, END};
+	public enum ColorEnum {BLACK, WHITE};
+	
 	
 	//Filepaths to images
 	public static final String WHITESQ = "Images/LightSquare.png";
 	public static final String BLACKSQ = "Images/DarkSquare.png";
+	public static final String ATTACKSQ = "Images/AttackSquare.png";
+	public static final String MOVESQ = "Images/MoveSquare.png";
+	public static final String HOLDSQ = "Images/HoldSquare.png";
 	
 	public static final String WBISHPATH = "Images/WhiteBishop.png";
 	public static final String BBISHPATH = "Images/BlackBishop.png";

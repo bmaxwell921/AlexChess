@@ -3,9 +3,8 @@ package main.chess.player;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.chess.model.ChessMove;
+import main.chess.common.Constants.ColorEnum;
 import main.chess.model.ChessPiece;
-import main.chess.model.ChessPiece.ColorEnum;
 
 public class ChessPlayer {
 

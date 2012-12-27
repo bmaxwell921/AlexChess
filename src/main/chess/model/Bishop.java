@@ -1,8 +1,10 @@
 package main.chess.model;
 
 import java.awt.Point;
+import java.util.Set;
 
 import main.chess.common.Constants;
+import main.chess.common.Constants.ColorEnum;
 
 public class Bishop extends ChessPiece {
 
@@ -12,13 +14,13 @@ public class Bishop extends ChessPiece {
 	}
 
 	@Override
-	public Point[] getValidMoveLocations(Board b) {
+	public Set<Point> getValidMoveLocations(Board b) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public ChessPiece[] getAttackedPieces(Board b) {
+	public Set<Point> getAttackedPieces(Board b) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -2,7 +2,7 @@ package main.chess.model;
 
 import java.awt.Point;
 
-import main.chess.model.ChessPiece.ColorEnum;
+import main.chess.common.Constants.ColorEnum;
 
 /**
  * A class to box up a ChessPiece and a location on the board

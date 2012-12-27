@@ -1,10 +1,14 @@
 package main.chess.logic;
 
 import java.awt.Point;
+import java.util.HashSet;
+import java.util.Set;
 
+import main.chess.common.Constants.ColorEnum;
+import main.chess.common.Constants.GameState;
 import main.chess.model.Board;
 import main.chess.model.ChessBlock;
-import main.chess.model.ChessPiece.ColorEnum;
+import main.chess.model.ChessPiece;
 import main.chess.player.ChessPlayer;
 
 public class ChessGame {
@@ -12,9 +16,6 @@ public class ChessGame {
 	//what player the client is. Me field in here?
 	
 	//TODO this class may need to be reworked too
-	
-	
-	public enum GameState {START, RUN_WAIT, RUN_HOLD_PIECE, END};
 	
 	/**
 	 * The board for this game
@@ -36,6 +37,11 @@ public class ChessGame {
 	 * The current state of the game
 	 */
 	private GameState curState;
+	
+	/**
+	 * The piece that is currently selected, or null
+	 */
+	private ChessPiece selectedPiece;
 	
 	/**
 	 * A constructor to set up a normally starting game of chess. I promise
@@ -80,6 +86,7 @@ public class ChessGame {
 	 * 
 	 * ---------------------NOTE: Maybe be useless------------------------
 	 */
+	@Deprecated
 	public void step() {
 		
 	}
@@ -90,6 +97,7 @@ public class ChessGame {
 	 * @param state
 	 * 				the state to transition to
 	 */
+	@Deprecated
 	public void transitionToState(GameState state) {
 		curState = state;
 	}
@@ -107,6 +115,84 @@ public class ChessGame {
 
 	public int getHeight() {
 		return board.getHeight();
+	}
+	
+	public ChessPiece getSelectedPiece() {
+		return selectedPiece;
+	}
+	
+	public boolean moveSelectedPieceToLocation(int i, int j) {
+		if (selectedPiece == null) return false;
+		return board.movePiece(selectedPiece.getLocation(), new Point(j, i));	
+	}
+	
+	/**
+	 * A method to set the selected piece as the piece at point i, j. If this is the same
+	 * piece that was already selected then it de-selects it
+	 * @param i
+	 * 			the first index of the piece
+	 * @param j
+	 * 			the second index of the piece
+	 */
+	public void setSelectedPiece(Point p) {
+		// TODO only allow selection of current player's pieces
+		if (this.canSelect(p)) {
+			selectedPiece = board.getBlock(p).getPiece();
+		} else {
+			selectedPiece = null;
+		}
+	}
+	
+	public boolean canSelect(Point p) {
+		ChessPiece newPiece = board.getBlock(p).getPiece();
+		return (newPiece != null && !newPiece.isSameSelectedPiece(selectedPiece));
+	}
+	
+	/**
+	 * A Method to get the location of the currently selected piece
+	 * @return
+	 * 			The point where the selected piece is, or null if there is no selected piece
+	 */
+	public Point getSelectedPieceLocation() {
+		if (selectedPiece != null) {
+			return selectedPiece.getLocation();
+		} else {
+			return null;
+		}
+	}
+	
+	/**
+	 * A method to return all the points that have pieces at them and that the selected piece can attack
+	 * @return
+	 * 			the set
+	 */
+	public Set<Point> getSelectedPieceAttackPieces() {
+		Set<Point> pieces = new HashSet<Point>();
+		if (selectedPiece != null) {
+			pieces = selectedPiece.getAttackedPieces(board);
+		}
+		return pieces;
+	}
+	
+	/**
+	 * A method to return all the locations that the selected piece can move to, excluding locations
+	 * that already have pieces there.
+	 * @return
+	 * 			the set
+	 */
+	public Set<Point> getSelectedPieceMoveLocations() {
+		Set<Point> locs = new HashSet<Point>();
+		if (selectedPiece != null) {
+			locs = selectedPiece.getValidMoveLocations(board);
+		}
+		return locs;
+	}
+
+	/**
+	 * Resets the selected piece to nothing
+	 */
+	public void resetSelectedPiece() {
+		selectedPiece = null;		
 	}
 
 }

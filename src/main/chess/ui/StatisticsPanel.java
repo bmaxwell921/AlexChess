@@ -11,15 +11,9 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingConstants;
 
+import main.chess.common.Constants.ColorEnum;
 import main.chess.logic.ImageUtil;
-import main.chess.model.Bishop;
 import main.chess.model.ChessBlock;
-import main.chess.model.ChessPiece;
-import main.chess.model.ChessPiece.ColorEnum;
-import main.chess.model.Knight;
-import main.chess.model.Pawn;
-import main.chess.model.Queen;
-import main.chess.model.Rook;
 import main.chess.player.ChessPlayer;
 
 public class StatisticsPanel extends JPanel {

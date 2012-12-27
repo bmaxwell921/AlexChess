@@ -1,9 +1,11 @@
 package main.chess.model;
 
 import java.awt.Point;
+import java.util.HashSet;
+import java.util.Set;
 
 import main.chess.common.Constants;
-import main.chess.model.ChessPiece.ColorEnum;
+import main.chess.common.Constants.ColorEnum;
 
 public class Pawn extends ChessPiece {
 
@@ -13,13 +15,15 @@ public class Pawn extends ChessPiece {
 	}
 
 	@Override
-	public Point[] getValidMoveLocations(Board b) {
+	public Set<Point> getValidMoveLocations(Board b) {
 		// TODO Auto-generated method stub
-		return null;
+		Set<Point> ret = new HashSet<Point>();
+		ret.add(new Point(this.getLocation().y, this.getLocation().x + 1));
+		return ret;
 	}
 
 	@Override
-	public ChessPiece[] getAttackedPieces(Board b) {
+	public Set<Point> getAttackedPieces(Board b) {
 		// TODO Auto-generated method stub
 		return null;
 	}

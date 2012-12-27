@@ -1,7 +1,6 @@
 package main.chess.logic;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -17,10 +16,11 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 import main.chess.common.Constants;
+import main.chess.common.Constants.ColorEnum;
+import main.chess.common.Constants.Tile;
 import main.chess.model.Bishop;
 import main.chess.model.ChessBlock;
 import main.chess.model.ChessPiece;
-import main.chess.model.ChessPiece.ColorEnum;
 import main.chess.model.King;
 import main.chess.model.Knight;
 import main.chess.model.Pawn;
@@ -33,7 +33,7 @@ public class ImageUtil {
 	
 	private static Map<ChessPiece, BufferedImage> imageMap = new HashMap<ChessPiece, BufferedImage>();
 	
-	private static BufferedImage blackSq, whiteSq;
+	private static BufferedImage blackSq, whiteSq, attackSq, moveSq, holdSq;
 	
 	static {
 		//setUpMap();
@@ -77,6 +77,9 @@ public class ImageUtil {
 			
 			blackSq = ImageIO.read(new File(Constants.BLACKSQ));
 			whiteSq = ImageIO.read(new File(Constants.WHITESQ));
+			attackSq = ImageIO.read(new File(Constants.ATTACKSQ));
+			moveSq = ImageIO.read(new File(Constants.MOVESQ));
+			holdSq = ImageIO.read(new File(Constants.HOLDSQ));
 			
 			im = ImageIO.read(new File(Constants.WBISHPATH));
 			imageMap.put(new Bishop(ColorEnum.WHITE, null), im);
@@ -195,11 +198,11 @@ public class ImageUtil {
 	 * @return
 	 * 			an image that shows the piece on top of the block it resides on
 	 */
-	public static Icon getBlendedIcon(ChessBlock block, int imageWidth, int imageHeight) {
+	public static Icon getBlendedIcon(ChessBlock block, Tile backgroundType, int imageWidth, int imageHeight) {
 		if (block.getPiece() == null) {
-			return getIconFromBlock(block, imageWidth, imageHeight);
+			return getTileIcon(backgroundType, imageWidth, imageHeight);
 		}
-		BufferedImage background = (block.getBlockColor() == ColorEnum.WHITE) ? whiteSq : blackSq;
+		BufferedImage background = getTileImage(backgroundType);
 		BufferedImage overlay = imageMap.get(block.getPiece());
 		
 		BufferedImage comb = new BufferedImage(overlay.getWidth(), overlay.getHeight(), 
@@ -221,10 +224,36 @@ public class ImageUtil {
 		Graphics2D g = im.createGraphics();
 		g.setColor(Color.WHITE);  
 		g.fillRect(0, 0, im.getWidth(), im.getHeight()); 
-    	//g.setComposite(AlphaComposite.Src);
     	g.drawImage(originalImage, 0, 0, imageWidth, imageHeight, null); 
     	g.dispose();
     	return im;
 	}
 
+	public static Icon getTileIcon(Tile type, int imageWidth, int imageHeight) {
+		BufferedImage img = getTileImage(type);
+		
+		return new ImageIcon(resizeImage(img, imageWidth, imageHeight));
+	}
+	
+	private static BufferedImage getTileImage(Tile type) {
+		BufferedImage img = null;
+		switch (type) {
+		case ATTACK:
+			img = attackSq;
+			break;
+		case BLACK:
+			img = blackSq;
+			break;
+		case WHITE:
+			img = whiteSq;
+			break;
+		case MOVE:
+			img = moveSq;
+			break;
+		case HOLD:
+			img = holdSq;
+			break;
+		}
+		return img;
+	}
 }
