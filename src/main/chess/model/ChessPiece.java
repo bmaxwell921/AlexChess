@@ -1,6 +1,7 @@
 package main.chess.model;
 
 import java.awt.Point;
+import java.lang.reflect.Constructor;
 import java.util.Set;
 
 import main.chess.common.Constants;
@@ -94,6 +95,7 @@ public abstract class ChessPiece implements Comparable<ChessPiece> {
 	}
 
 	public boolean isOpponent(ChessPiece other) {
+		if (other == null) return false;
 		return this.getColor() != other.getColor();
 	}
 	
@@ -127,5 +129,17 @@ public abstract class ChessPiece implements Comparable<ChessPiece> {
 	
 	public void setValue(int value) {
 		this.value = value;
+	}
+	
+	@Override
+	public Object clone() {
+		Constructor cons = getClass().getConstructors()[0];
+		try {
+			return cons.newInstance(new Object[] {color, (Point) location.clone()});
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

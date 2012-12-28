@@ -75,4 +75,9 @@ public class ChessBlock implements Comparable<ChessBlock> {
 			return this.getPiece().compareTo(o.getPiece());
 		}
 	}
+	
+	@Override
+	public Object clone() {
+		return new ChessBlock((ChessPiece) this.piece.clone(), (Point) this.location.clone(), this.blockColor);
+	}
 }

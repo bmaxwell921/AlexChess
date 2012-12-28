@@ -17,7 +17,6 @@ import main.chess.common.Constants.Tile;
 import main.chess.logic.ChessGame;
 import main.chess.logic.ImageUtil;
 import main.chess.model.ChessBlock;
-import main.chess.model.ChessPiece;
 
 public class ChessPanel extends JPanel implements ActionListener {
 
@@ -56,7 +55,7 @@ public class ChessPanel extends JPanel implements ActionListener {
 		this.parent = parent;
 		this.game = game;
 		state = GameState.START;
-		this.setLayout(new GridLayout(game.getHeight(), game.getWidth()));
+		this.setLayout(new GridLayout(game.getHeight() + 1, game.getWidth() + 1));
 		setUpBoard(game);
 	}
 
@@ -96,7 +95,6 @@ public class ChessPanel extends JPanel implements ActionListener {
 		if (e.getSource().getClass() == ChessBoardButton.class) {
 			this.updateSelectedPiece((ChessBoardButton) e.getSource());
 		}
-		repaint();
 	}
 
 	private void updateSelectedPiece(ChessBoardButton b) {
@@ -116,17 +114,18 @@ public class ChessPanel extends JPanel implements ActionListener {
 		// For moving to an empty square
 		else if (game.canMoveTo(newP)) {
 			this.movePiece(game.getSelectedPieceLocation(), newP);
+			game.changePlayer();
 		}
 		//For capturing a piece
 		else if (game.canCaptureAt(newP)) {
 			this.capturePiece(game.getSelectedPieceLocation(), newP);
+			game.changePlayer();
 		}
 		//For anything else, ie an empty square that you can't move to or the original piece
 		else {
 			game.resetSelectedPiece();
 			state = GameState.RUN_WAIT;
 		}
-		repaint();
 	}
 
 	private void capturePiece(Point oldP, Point newP) {

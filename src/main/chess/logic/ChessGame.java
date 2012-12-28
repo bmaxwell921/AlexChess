@@ -238,13 +238,32 @@ public class ChessGame {
 		return board.willCapture(selectedPiece.getLocation(), p); 
 	}
 
+	/**
+	 * Method to capture a piece at the given location
+	 * @param p
+	 * 			the location to capture at
+	 * @return
+	 * 			the block that contains the captured piece
+	 */
 	public ChessBlock capturePieceAt(Point p) {
 		if (selectedPiece == null || !canCaptureAt(p)) return null;
 		return board.capture(selectedPiece.getLocation(), p);		
 	}
 
+	/**
+	 * Method to get the player that just had its piece captured
+	 * @return
+	 * 			the player who just lost a piece
+	 */
 	public ChessPlayer getCapturedPlayer() {
 		return (cur.getColor() == ColorEnum.WHITE) ? white : black;
+	}
+	
+	/**
+	 * A method to change the current player to the other player
+	 */
+	public void changePlayer() {
+		cur = (cur == white) ? black : white;
 	}
 
 }

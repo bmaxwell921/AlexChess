@@ -76,7 +76,7 @@ public class Board {
 
 	private void setUpKings() {
 		board[0][4].setPiece(new King(ColorEnum.WHITE, new Point(4,0)));
-		board[7][3].setPiece(new King(ColorEnum.WHITE, new Point(3,7)));
+		board[7][3].setPiece(new King(ColorEnum.BLACK, new Point(3,7)));
 	}
 
 	/**
@@ -102,13 +102,14 @@ public class Board {
 	 * @return whether you can move to toLocation from fromLocation
 	 */
 	public boolean canMovePiece(Point fromLocation, Point toLocation) {
+		if (fromLocation.equals(toLocation)) return false;
 		ChessPiece occupyingPiece = this.getBlock(toLocation).getPiece();
 		// The location you are moving to needs to be empty and the location you
 		// are trying to go to
 		// must be in the locations you can move to
 		return occupyingPiece == null
-				&& this.getBlock(fromLocation).getPiece()
-						.getMovePositions(this).contains(toLocation);
+				&& (this.getBlock(fromLocation).getPiece()
+						.getMovePositions(this).contains(toLocation));
 	}
 
 	/**
@@ -122,6 +123,14 @@ public class Board {
 	public void movePiece(Point fromLocation, Point toLocation) {
 		if (!canMovePiece(fromLocation, toLocation))
 			return;
+//		board[toLocation.y][toLocation.x]
+//				.setPiece(board[fromLocation.y][fromLocation.x].getPiece());
+//		board[fromLocation.y][fromLocation.x].setPiece(null);
+//		board[toLocation.y][toLocation.x].getPiece().move(toLocation);
+		this.unsafeMovePiece(fromLocation, toLocation);
+	}
+	
+	private void unsafeMovePiece(Point fromLocation, Point toLocation) {
 		board[toLocation.y][toLocation.x]
 				.setPiece(board[fromLocation.y][fromLocation.x].getPiece());
 		board[fromLocation.y][fromLocation.x].setPiece(null);
@@ -141,6 +150,7 @@ public class Board {
 	 * @return
 	 */
 	public boolean willCapture(Point fromLocation, Point toLocation) {
+		if (fromLocation.equals(toLocation)) return false;
 		ChessPiece occupyingPiece = this.getBlock(toLocation).getPiece();
 		ChessPiece capturingPiece = this.getBlock(fromLocation).getPiece();
 		return occupyingPiece != null && capturingPiece != null 
@@ -160,11 +170,11 @@ public class Board {
 	 */
 	public ChessBlock capture(Point fromLocation, Point toLocation) {
 		if (!willCapture(fromLocation, toLocation)) return null;
-		ChessBlock captured = this.getBlock(toLocation);
+		ChessBlock captured = (ChessBlock) this.getBlock(toLocation).clone();
 		// TODO We are getting pass by reference issues here because captured.piece becomes null when we still want it
 		//maybe need to make a clone method or something
-		this.getBlock(toLocation).setPiece(null);
-		this.movePiece(fromLocation, toLocation);
+		//this.getBlock(toLocation).setPiece(null);
+		this.unsafeMovePiece(fromLocation, toLocation);
 		return captured;
 	}
 
