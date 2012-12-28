@@ -12,9 +12,7 @@ import main.chess.common.Constants.ColorEnum;
  *
  */
 public abstract class ChessPiece implements Comparable<ChessPiece> {
-	
 
-	
 	//Id for serializing and hashcode
 	private String id;
 	
@@ -26,6 +24,8 @@ public abstract class ChessPiece implements Comparable<ChessPiece> {
 	
 	//Piece's color, black or white. If you don't understand Enums look it up or text me
 	private ColorEnum color;
+	
+	private boolean hasMoved;
 	
 	public ChessPiece(ColorEnum color, Point pos, String id, int value) {
 		this.color = color;
@@ -86,6 +86,11 @@ public abstract class ChessPiece implements Comparable<ChessPiece> {
 	
 	public boolean isSameSelectedPiece(ChessPiece other) {
 		return this.equals(other) && this.location.equals(other.location);
+	}
+	
+	public void move(Point newLoc) {
+		this.setLocation(newLoc);
+		this.hasMoved = true;
 	}
 	
 	public Point getLocation() {

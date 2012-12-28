@@ -25,15 +25,15 @@ public class Board {
 			for (int j = 0; j < WIDTH; ++j) {
 				board[j][i] = new ChessBlock(
 						null, 
-						new Point(j, i), curWhite ? ColorEnum.WHITE : ColorEnum.BLACK);
+						new Point(i, j), curWhite ? ColorEnum.WHITE : ColorEnum.BLACK);
 				curWhite = !curWhite;
 			}
 			rowStartWhite = !rowStartWhite;
 		}
 		// For testing
-		board[HEIGHT/2][WIDTH/2] = new ChessBlock(
-				new Pawn(ColorEnum.WHITE, new Point(HEIGHT/2, WIDTH/2)), 
-				new Point(HEIGHT/2, WIDTH/2), ColorEnum.BLACK);
+		board[0][WIDTH/2] = new ChessBlock(
+				new Pawn(ColorEnum.WHITE, new Point(WIDTH/2, 0)), 
+				new Point(WIDTH/2, 0), ColorEnum.BLACK);
 		//TODO set up the pieces in their default locations
 	}
 	
@@ -75,6 +75,7 @@ public class Board {
 		if (!canMovePiece(fromLocation, toLocation)) return;
 		board[toLocation.y][toLocation.x].setPiece(board[fromLocation.y][fromLocation.x].getPiece());
 		board[fromLocation.y][fromLocation.x].setPiece(null);
+		board[toLocation.y][toLocation.x].getPiece().move(toLocation);
 	}
 	
 	/**

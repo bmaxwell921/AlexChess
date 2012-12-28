@@ -101,7 +101,7 @@ public class ChessPanel extends JPanel implements ActionListener {
 
 	private void updateSelectedPiece(ChessBoardButton b) {
 		// The point representation of the clicked button
-		Point newP = new Point(b.getJ(), b.getI());
+		Point newP = new Point(b.getJ(), b.getI());		
 		if (state == GameState.RUN_HOLD_PIECE) {
 			this.resetOldSelected();
 		}
@@ -115,9 +115,7 @@ public class ChessPanel extends JPanel implements ActionListener {
 		} 
 		// For moving to an empty square
 		else if (game.canMoveTo(newP)) {
-			game.moveSelectedPieceToLocation(newP);
-			game.resetSelectedPiece();
-			state = GameState.RUN_WAIT;
+			this.movePiece(game.getSelectedPieceLocation(), newP);
 		}
 		//For capturing a piece
 		else if (game.canCaptureAt(newP)) {
@@ -129,6 +127,22 @@ public class ChessPanel extends JPanel implements ActionListener {
 			state = GameState.RUN_WAIT;
 		}
 		repaint();
+	}
+
+	private void movePiece(Point oldLoc, Point newP) {
+		//Update the ui	TODO this still needs to be done	
+		updateButton(game.getAt(newP), newP, 
+				game.getAt(newP).getBlockColor() == ColorEnum.WHITE ? Tile.WHITE : Tile.BLACK);
+		
+		//Update the logic
+		game.moveSelectedPieceToLocation(newP);
+		
+		updateButton(game.getAt(oldLoc), oldLoc, 
+				game.getAt(oldLoc).getBlockColor() == ColorEnum.WHITE ? Tile.WHITE : Tile.BLACK);
+		this.resetOldSelected();
+		game.resetSelectedPiece();
+		state = GameState.RUN_WAIT;
+		
 	}
 
 	private void resetOldSelected() {
