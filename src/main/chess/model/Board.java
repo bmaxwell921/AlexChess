@@ -141,8 +141,11 @@ public class Board {
 	 * @return
 	 */
 	public boolean willCapture(Point fromLocation, Point toLocation) {
-		// TODO
-		return false;
+		ChessPiece occupyingPiece = this.getBlock(toLocation).getPiece();
+		ChessPiece capturingPiece = this.getBlock(fromLocation).getPiece();
+		return occupyingPiece != null && capturingPiece != null 
+				&& capturingPiece.getAttackPositions(this).contains(toLocation)
+				&& capturingPiece.isOpponent(occupyingPiece);
 	}
 
 	/**
@@ -155,9 +158,14 @@ public class Board {
 	 *            the location the to be captured piece is at
 	 * @return the piece that was captured
 	 */
-	public ChessPiece capture(Point fromLocation, Point toLocation) {
-		// TODO
-		return null;
+	public ChessBlock capture(Point fromLocation, Point toLocation) {
+		if (!willCapture(fromLocation, toLocation)) return null;
+		ChessBlock captured = this.getBlock(toLocation);
+		// TODO We are getting pass by reference issues here because captured.piece becomes null when we still want it
+		//maybe need to make a clone method or something
+		this.getBlock(toLocation).setPiece(null);
+		this.movePiece(fromLocation, toLocation);
+		return captured;
 	}
 
 	/**

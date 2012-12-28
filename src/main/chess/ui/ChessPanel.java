@@ -1,6 +1,5 @@
 package main.chess.ui;
 
-import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -18,6 +17,7 @@ import main.chess.common.Constants.Tile;
 import main.chess.logic.ChessGame;
 import main.chess.logic.ImageUtil;
 import main.chess.model.ChessBlock;
+import main.chess.model.ChessPiece;
 
 public class ChessPanel extends JPanel implements ActionListener {
 
@@ -119,7 +119,7 @@ public class ChessPanel extends JPanel implements ActionListener {
 		}
 		//For capturing a piece
 		else if (game.canCaptureAt(newP)) {
-			
+			this.capturePiece(game.getSelectedPieceLocation(), newP);
 		}
 		//For anything else, ie an empty square that you can't move to or the original piece
 		else {
@@ -129,8 +129,28 @@ public class ChessPanel extends JPanel implements ActionListener {
 		repaint();
 	}
 
+	private void capturePiece(Point oldP, Point newP) {
+		//Move the picture to the new piece
+		updateButton(game.getAt(newP), newP, 
+				game.getAt(newP).getBlockColor() == ColorEnum.WHITE ? Tile.WHITE : Tile.BLACK);
+		
+		//Update the logic
+		ChessBlock caped = game.capturePieceAt(newP);
+		
+		//Change the old button to just a tile
+		updateButton(game.getAt(oldP), oldP, 
+				game.getAt(oldP).getBlockColor() == ColorEnum.WHITE ? Tile.WHITE : Tile.BLACK);
+		
+		// Reset the selected piece 
+		this.resetOldSelected();
+		game.resetSelectedPiece();
+		state = GameState.RUN_WAIT;
+		
+		parent.addCapturedPiece(game.getCapturedPlayer(), caped);
+	}
+
 	private void movePiece(Point oldLoc, Point newP) {
-		//Update the ui	TODO this still needs to be done	
+		//Update the ui	TODO make this cleaner	
 		updateButton(game.getAt(newP), newP, 
 				game.getAt(newP).getBlockColor() == ColorEnum.WHITE ? Tile.WHITE : Tile.BLACK);
 		
@@ -141,8 +161,7 @@ public class ChessPanel extends JPanel implements ActionListener {
 				game.getAt(oldLoc).getBlockColor() == ColorEnum.WHITE ? Tile.WHITE : Tile.BLACK);
 		this.resetOldSelected();
 		game.resetSelectedPiece();
-		state = GameState.RUN_WAIT;
-		
+		state = GameState.RUN_WAIT;		
 	}
 
 	private void resetOldSelected() {
