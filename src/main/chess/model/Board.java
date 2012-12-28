@@ -30,9 +30,7 @@ public class Board {
 			}
 			rowStartWhite = !rowStartWhite;
 		}
-		//TODO set up the pieces in their default locations
-
-		
+		//Sets the pieces in their starting locations
 		this.setUpPawns();
 		this.setUpRooks();
 		this.setUpKnights();
