@@ -143,9 +143,17 @@ public class ChessGame {
 		}
 	}
 	
+	/**
+	 * Method to check whether the current player can select the square at point p
+	 * @param p
+	 * 			the point to check
+	 * @return
+	 * 			whether the player can select that piece or not
+	 */
 	public boolean canSelect(Point p) {
 		ChessPiece newPiece = board.getBlock(p).getPiece();
-		return (newPiece != null && !newPiece.isSameSelectedPiece(selectedPiece));
+		return (newPiece != null && !newPiece.isSameSelectedPiece(selectedPiece)
+				&& newPiece.getColor() == cur.getColor());
 	}
 	
 	/**
@@ -230,9 +238,13 @@ public class ChessGame {
 		return board.willCapture(selectedPiece.getLocation(), p); 
 	}
 	
-	public ChessPiece capturePieceAt(Point p) {
+	public ChessBlock capturePieceAt(Point p) {
 		if (selectedPiece == null || !canCaptureAt(p)) return null;
 		return board.capture(selectedPiece.getLocation(), p);		
+	}
+
+	public ChessPlayer getCapturedPlayer() {
+		return (cur.getColor() == ColorEnum.WHITE) ? white : black;
 	}
 
 }
