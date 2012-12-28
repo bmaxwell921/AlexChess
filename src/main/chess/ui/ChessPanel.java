@@ -46,7 +46,7 @@ public class ChessPanel extends JPanel implements ActionListener {
 	 * The current state of the game
 	 */
 	private GameState state;
-	
+
 	/**
 	 * The panel that holds this panel. This is used to add stuff to the stat panel
 	 */
@@ -105,7 +105,7 @@ public class ChessPanel extends JPanel implements ActionListener {
 		if (state == GameState.RUN_HOLD_PIECE) {
 			this.resetOldSelected();
 		}
-		
+
 		// For selecting a new piece
 		if (game.canSelect(newP)) {
 			//If we already have a selected piece reset its stuff
@@ -133,19 +133,19 @@ public class ChessPanel extends JPanel implements ActionListener {
 		//Move the picture to the new piece
 		updateButton(game.getAt(newP), newP, 
 				game.getAt(newP).getBlockColor() == ColorEnum.WHITE ? Tile.WHITE : Tile.BLACK);
-		
+
 		//Update the logic
 		ChessBlock caped = game.capturePieceAt(newP);
-		
+
 		//Change the old button to just a tile
 		updateButton(game.getAt(oldP), oldP, 
 				game.getAt(oldP).getBlockColor() == ColorEnum.WHITE ? Tile.WHITE : Tile.BLACK);
-		
+
 		// Reset the selected piece 
 		this.resetOldSelected();
 		game.resetSelectedPiece();
 		state = GameState.RUN_WAIT;
-		
+
 		parent.addCapturedPiece(game.getCapturedPlayer(), caped);
 	}
 
@@ -153,10 +153,10 @@ public class ChessPanel extends JPanel implements ActionListener {
 		//Update the ui	TODO make this cleaner	
 		updateButton(game.getAt(newP), newP, 
 				game.getAt(newP).getBlockColor() == ColorEnum.WHITE ? Tile.WHITE : Tile.BLACK);
-		
+
 		//Update the logic
 		game.moveSelectedPieceToLocation(newP);
-		
+
 		updateButton(game.getAt(oldLoc), oldLoc, 
 				game.getAt(oldLoc).getBlockColor() == ColorEnum.WHITE ? Tile.WHITE : Tile.BLACK);
 		this.resetOldSelected();
@@ -171,19 +171,19 @@ public class ChessPanel extends JPanel implements ActionListener {
 		this.changeLocColor(game.getSelectedPieceAttackPieces(), true, Tile.WHITE);
 		this.changeLocColor(game.getSelectedPieceMoveLocations(), true, Tile.WHITE);
 	}
-	
+
 	private void updateSelected() {
 		this.changeHold(Tile.HOLD);
 		this.changeLocColor(game.getSelectedPieceAttackPieces(), false, Tile.ATTACK);
 		this.changeLocColor(game.getSelectedPieceMoveLocations(), false, Tile.MOVE);
 	}
-	
+
 	private void changeHold(Tile type) {
 		Point selectedLoc = game.getSelectedPieceLocation();
 		ChessBlock block = game.getAt(selectedLoc);
 		updateButton(block, selectedLoc, type);	
 	}
-	
+
 	private void changeLocColor(Set<Point> locs, boolean useTileType, Tile otherType) {
 		if (locs != null) {
 			Tile backgroundType;
@@ -198,7 +198,7 @@ public class ChessPanel extends JPanel implements ActionListener {
 			}
 		}
 	}
-	
+
 	private void updateButton(ChessBlock block, Point selectedLoc, Tile type) {
 		chessBoard[selectedLoc.y][selectedLoc.x].setIcon(ImageUtil.getBlendedIcon(block,
 				type, squareSize, squareSize));

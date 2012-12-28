@@ -14,35 +14,35 @@ import main.chess.player.ChessPlayer;
 public class ChessGame {
 	//TODO need to protect against black making moves for white so we need an idea of
 	//what player the client is. Me field in here?
-	
+
 	//TODO this class may need to be reworked too
-	
+
 	/**
 	 * The board for this game
 	 */
 	private Board board;
-	
+
 	/**
 	 * Players for this game
 	 */
 	private ChessPlayer white;
 	private ChessPlayer black;
-	
+
 	/**
 	 * The current player who is making a move
 	 */
 	private ChessPlayer cur;
-	
+
 	/**
 	 * The current state of the game
 	 */
 	private GameState curState;
-	
+
 	/**
 	 * The piece that is currently selected, or null
 	 */
 	private ChessPiece selectedPiece;
-	
+
 	/**
 	 * A constructor to set up a normally starting game of chess. I promise
 	 * these local variables aren't racist
@@ -55,17 +55,17 @@ public class ChessGame {
 	public ChessGame(String whiteName, String blackName) {
 		//Sets up a new game of chess
 		board = new Board();
-		
+
 		white = new ChessPlayer(whiteName, ColorEnum.WHITE);
-		
+
 		black = new ChessPlayer(blackName, ColorEnum.BLACK);
-		
+
 		//White always starts in chess
 		cur = white;
-		
+
 		curState = GameState.START;
 	}
-	
+
 	/**
 	 * Takes in the string representation of this game. This will be sent from
 	 * the server. Format tba
@@ -75,11 +75,11 @@ public class ChessGame {
 	public ChessGame(String source) {
 		//TODO
 	}
-	
+
 	public ChessBlock getAt(Point loc) {
 		return board.getBlock(loc);
 	}
-	
+
 	/**
 	 * Main execution method for the game. This will execute one step of 
 	 * the game.
@@ -88,9 +88,9 @@ public class ChessGame {
 	 */
 	@Deprecated
 	public void step() {
-		
+
 	}
-	
+
 	/**
 	 * Method to transition to a new internal state
 	 * ---------------------NOTE: Maybe be useless------------------------
@@ -101,8 +101,8 @@ public class ChessGame {
 	public void transitionToState(GameState state) {
 		curState = state;
 	}
-	
-	
+
+
 	@Override
 	public String toString() {
 		//TODO this will be used for saving the game
@@ -116,16 +116,16 @@ public class ChessGame {
 	public int getHeight() {
 		return board.getHeight();
 	}
-	
+
 	public ChessPiece getSelectedPiece() {
 		return selectedPiece;
 	}
-	
+
 	public void moveSelectedPieceToLocation(Point p) {
 		if (selectedPiece == null || !this.canMoveTo(p)) return;
 		board.movePiece(selectedPiece.getLocation(), p);	
 	}
-	
+
 	/**
 	 * A method to set the selected piece as the piece at point i, j. If this is the same
 	 * piece that was already selected then it de-selects it
@@ -142,7 +142,7 @@ public class ChessGame {
 			selectedPiece = null;
 		}
 	}
-	
+
 	/**
 	 * Method to check whether the current player can select the square at point p
 	 * @param p
@@ -155,7 +155,7 @@ public class ChessGame {
 		return (newPiece != null && !newPiece.isSameSelectedPiece(selectedPiece)
 				&& newPiece.getColor() == cur.getColor());
 	}
-	
+
 	/**
 	 * A Method to get the location of the currently selected piece
 	 * @return
@@ -168,7 +168,7 @@ public class ChessGame {
 			return null;
 		}
 	}
-	
+
 	/**
 	 * A method to return all the points that have pieces at them and that the selected piece can attack
 	 * @return
@@ -181,7 +181,7 @@ public class ChessGame {
 		}
 		return pieces;
 	}
-	
+
 	/**
 	 * A method to return all the locations that the selected piece can move to, excluding locations
 	 * that already have pieces there.
@@ -215,7 +215,7 @@ public class ChessGame {
 		if (selectedPiece == null) return false;
 		return board.canMovePiece(selectedPiece.getLocation(), newP);
 	}
-	
+
 	/**
 	 * Method to move the selected piece from one position to another
 	 * @param p
@@ -225,7 +225,7 @@ public class ChessGame {
 		// Moves the selected piece to the chosen location
 		board.movePiece(selectedPiece.getLocation(), p);
 	}
-	
+
 	/**
 	 * Method to check whether the selected piece can capture a piece at the given location
 	 * @param p
@@ -237,7 +237,7 @@ public class ChessGame {
 		if (selectedPiece == null) return false;
 		return board.willCapture(selectedPiece.getLocation(), p); 
 	}
-	
+
 	public ChessBlock capturePieceAt(Point p) {
 		if (selectedPiece == null || !canCaptureAt(p)) return null;
 		return board.capture(selectedPiece.getLocation(), p);		
