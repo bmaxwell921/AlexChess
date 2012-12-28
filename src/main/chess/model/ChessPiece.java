@@ -25,7 +25,7 @@ public abstract class ChessPiece implements Comparable<ChessPiece> {
 	//Piece's color, black or white. If you don't understand Enums look it up or text me
 	private ColorEnum color;
 	
-	private boolean hasMoved;
+	protected boolean hasMoved;
 	
 	public ChessPiece(ColorEnum color, Point pos, String id, int value) {
 		this.color = color;

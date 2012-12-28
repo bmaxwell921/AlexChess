@@ -8,13 +8,9 @@ import main.chess.common.Constants;
 import main.chess.common.Constants.ColorEnum;
 
 public class Pawn extends ChessPiece {
-
-	// TODO remember to change this
-	private boolean hasMoved;
 	
 	public Pawn(ColorEnum color, Point pos) {
 		super(color, pos, Constants.PAWN, Constants.PAWNVAL);
-		hasMoved = false;
 	}
 
 	@Override
