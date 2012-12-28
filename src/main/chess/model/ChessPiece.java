@@ -92,6 +92,10 @@ public abstract class ChessPiece implements Comparable<ChessPiece> {
 		this.setLocation(newLoc);
 		this.hasMoved = true;
 	}
+
+	public boolean isOpponent(ChessPiece other) {
+		return this.getColor() != other.getColor();
+	}
 	
 	public Point getLocation() {
 		return location;
