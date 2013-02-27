@@ -45,7 +45,6 @@ public class ChessPanel extends JPanel implements ActionListener {
 				//from the ClassToIconUtil. 
 				JButton newButton;
 				
-				//TODO add this in once we have the images
 //				newButton =  new JButton(ClassToIconUtil.getIconFromClass(
 //						game.getAt(new Point(j, i)).getPiece()));
 				newButton = new JButton(i + ", " + j);

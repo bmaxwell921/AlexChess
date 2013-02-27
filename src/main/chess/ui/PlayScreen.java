@@ -3,20 +3,20 @@ package main.chess.ui;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import main.chess.logic.ChessGame;
 import main.chess.model.ChessBlock;
 import main.chess.player.ChessPlayer;
-
-import java.awt.GridLayout;
-import javax.swing.JLabel;
 
 public class PlayScreen extends JPanel implements ActionListener {
 
@@ -36,11 +36,6 @@ public class PlayScreen extends JPanel implements ActionListener {
 	private JButton save;
 	
 	/**
-	 * The game currently being played
-	 */
-	private ChessGame game;
-	
-	/**
 	 * Panel that holds the lost pieces for this game
 	 */
 	private StatisticsPanel statPanel;
@@ -50,9 +45,7 @@ public class PlayScreen extends JPanel implements ActionListener {
 	 */
 	private Container parent;
 	
-	public PlayScreen(ChessGame game, Container parent) {
-		this.game = game;
-		
+	public PlayScreen(ChessGame game, Container parent) {		
 		this.parent = parent;
 		
 		this.setLayout(new BorderLayout());
@@ -65,14 +58,9 @@ public class PlayScreen extends JPanel implements ActionListener {
 		
 		//ChessPanel holds the actual board of buttons to click
 		ChessPanel chessPanel = new ChessPanel(this, game);
-		GridLayout gridLayout = (GridLayout) chessPanel.getLayout();
-		gridLayout.setColumns(9);
-		gridLayout.setRows(0);
 		this.add(chessPanel, BorderLayout.CENTER);
 		
-		//TODO Need to add a stats panel to the screen
 		statPanel = new StatisticsPanel();
-		
 		this.add(statPanel, BorderLayout.EAST);
 	}
 	
@@ -130,6 +118,7 @@ public class PlayScreen extends JPanel implements ActionListener {
 	
 	public void addCapturedPiece(ChessPlayer lostPlayer, ChessBlock lostPiece) {
 		statPanel.addCapturedPiece(lostPlayer, lostPiece);
+		statPanel.revalidate();
 	}
 
 }

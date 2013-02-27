@@ -41,8 +41,6 @@ public class PlayScreen extends JPanel implements ActionListener {
 		
 		//ChessPanel holds the actual board of buttons to click
 		this.add(new ChessPanel(game), BorderLayout.CENTER);
-		
-		//TODO Need to add a stats panel to the screen
 	}
 	
 	private void setUpButtons() {

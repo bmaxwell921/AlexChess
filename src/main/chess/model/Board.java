@@ -30,7 +30,9 @@ public class Board {
 			}
 			rowStartWhite = !rowStartWhite;
 		}
-		//Sets the pieces in their starting locations
+		//TODO set up the pieces in their default locations
+
+
 		this.setUpPawns();
 		this.setUpRooks();
 		this.setUpKnights();
@@ -52,29 +54,29 @@ public class Board {
 		board[7][0].setPiece(new Rook(ColorEnum.BLACK, new Point(0,7)));
 		board[7][7].setPiece(new Rook(ColorEnum.BLACK, new Point(7,7)));
 	}
-	
+
 	private void setUpKnights() {
 		board[0][1].setPiece(new Knight(ColorEnum.WHITE, new Point(1,0)));
 		board[0][6].setPiece(new Knight(ColorEnum.WHITE, new Point(6,0)));
 		board[7][1].setPiece(new Knight(ColorEnum.BLACK, new Point(1,7)));
 		board[7][6].setPiece(new Knight(ColorEnum.BLACK, new Point(6,7)));
 	}
-	
+
 	private void setUpBishops() {
 		board[0][2].setPiece(new Bishop(ColorEnum.WHITE, new Point(2,0)));
 		board[0][5].setPiece(new Bishop(ColorEnum.WHITE, new Point(5,0)));
 		board[7][2].setPiece(new Bishop(ColorEnum.BLACK, new Point(2,7)));
 		board[7][5].setPiece(new Bishop(ColorEnum.BLACK, new Point(5,7)));
 	}
-	
+
 	private void setUpQueens() {
 		board[0][3].setPiece(new Queen(ColorEnum.WHITE, new Point(3,0)));
 		board[7][4].setPiece(new Queen(ColorEnum.BLACK, new Point(4,7)));
 	}
-	
+
 	private void setUpKings() {
 		board[0][4].setPiece(new King(ColorEnum.WHITE, new Point(4,0)));
-		board[7][3].setPiece(new King(ColorEnum.WHITE, new Point(3,7)));
+		board[7][3].setPiece(new King(ColorEnum.BLACK, new Point(3,7)));
 	}
 
 	/**
@@ -100,13 +102,14 @@ public class Board {
 	 * @return whether you can move to toLocation from fromLocation
 	 */
 	public boolean canMovePiece(Point fromLocation, Point toLocation) {
+		if (fromLocation.equals(toLocation)) return false;
 		ChessPiece occupyingPiece = this.getBlock(toLocation).getPiece();
 		// The location you are moving to needs to be empty and the location you
 		// are trying to go to
 		// must be in the locations you can move to
 		return occupyingPiece == null
-				&& this.getBlock(fromLocation).getPiece()
-						.getMovePositions(this).contains(toLocation);
+				&& (this.getBlock(fromLocation).getPiece()
+						.getMovePositions(this).contains(toLocation));
 	}
 
 	/**
@@ -120,6 +123,14 @@ public class Board {
 	public void movePiece(Point fromLocation, Point toLocation) {
 		if (!canMovePiece(fromLocation, toLocation))
 			return;
+//		board[toLocation.y][toLocation.x]
+//				.setPiece(board[fromLocation.y][fromLocation.x].getPiece());
+//		board[fromLocation.y][fromLocation.x].setPiece(null);
+//		board[toLocation.y][toLocation.x].getPiece().move(toLocation);
+		this.unsafeMovePiece(fromLocation, toLocation);
+	}
+	
+	private void unsafeMovePiece(Point fromLocation, Point toLocation) {
 		board[toLocation.y][toLocation.x]
 				.setPiece(board[fromLocation.y][fromLocation.x].getPiece());
 		board[fromLocation.y][fromLocation.x].setPiece(null);
@@ -139,8 +150,12 @@ public class Board {
 	 * @return
 	 */
 	public boolean willCapture(Point fromLocation, Point toLocation) {
-		// TODO
-		return false;
+		if (fromLocation.equals(toLocation)) return false;
+		ChessPiece occupyingPiece = this.getBlock(toLocation).getPiece();
+		ChessPiece capturingPiece = this.getBlock(fromLocation).getPiece();
+		return occupyingPiece != null && capturingPiece != null 
+				&& capturingPiece.getAttackPositions(this).contains(toLocation)
+				&& capturingPiece.isOpponent(occupyingPiece);
 	}
 
 	/**
@@ -153,9 +168,14 @@ public class Board {
 	 *            the location the to be captured piece is at
 	 * @return the piece that was captured
 	 */
-	public ChessPiece capture(Point fromLocation, Point toLocation) {
-		// TODO
-		return null;
+	public ChessBlock capture(Point fromLocation, Point toLocation) {
+		if (!willCapture(fromLocation, toLocation)) return null;
+		ChessBlock captured = (ChessBlock) this.getBlock(toLocation).clone();
+		// TODO We are getting pass by reference issues here because captured.piece becomes null when we still want it
+		//maybe need to make a clone method or something
+		//this.getBlock(toLocation).setPiece(null);
+		this.unsafeMovePiece(fromLocation, toLocation);
+		return captured;
 	}
 
 	/**

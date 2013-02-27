@@ -1,6 +1,7 @@
 package main.chess.ui;
 
 import java.awt.CardLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Frame;
 
@@ -40,7 +41,7 @@ public class Main {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		//frame.setBounds(100, 100, 750, 600);
+//		frame.setPreferredSize(new Dimension(850, 850));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new CardLayout(0, 0));
 		

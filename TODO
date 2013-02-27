@@ -24,21 +24,20 @@ Alex's Tasks (Roughly by priority):
 	
 Brandon's Tasks (Kinda by priority):
 	-Finish the UI
-		-Implement Stubbed methods
-			-Mostly logic stuff
-		-Images aren't resized correctly when you change the window size
 		-Implement GameIOUtil
+			- Serialize stuff
 		-Make sure pressing X button saves first (hold onto old location)
 		-Get everything sized well
-		-Change the square color a bit so it's off black, otherwise the pieces
-			blend with the background
-	-Finish the ChessGame class
-		-Currently nothing handles removing pieces and stuff	
 	-Finish design details
-		-How to serialize all the stuff for saving to the local file system
+		- How to serialize all the stuff for saving to the local file system
+		- How do you start a game?
 	-Implement saving the game state and loading the game state			
 	-Implement server interactions
 		-Should just need a servlet to handle get and post requests and then
 			a Util or something to send get and post requests to the servlet
-		-Will need to add the GAE plugin
-		-Apache Commons most likely too, Maven?		
+	- Optimizations
+	 	- Fix the ChessPanel to have logic in the ChessGame
+		- Stat panel doesn't line wrap	
+		-Images aren't resized correctly when you change the window size
+		- Only on my screen since my monitor is rectangular. Set the size of the application
+			to be square		
