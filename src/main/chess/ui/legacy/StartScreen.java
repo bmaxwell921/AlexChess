@@ -1,4 +1,4 @@
-package main.chess.ui;
+package main.chess.ui.legacy;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import main.chess.common.Constants;
-import main.chess.logic.ChessGame;
+import main.chess.logic.legacy.ChessGame;
 
 public class StartScreen extends JPanel implements ActionListener {
 

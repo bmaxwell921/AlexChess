@@ -1,8 +1,9 @@
-package main.chess.model;
+package main.chess.model.notPieces;
 
 import java.awt.Point;
 
 import main.chess.common.Constants.ColorEnum;
+import main.chess.model.pieces.ChessPiece;
 
 /**
  * A class to box up a ChessPiece and a location on the board

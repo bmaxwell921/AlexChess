@@ -1,4 +1,4 @@
-package main.chess.ui;
+package main.chess.ui.legacy;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -16,7 +16,7 @@ import javax.swing.SwingConstants;
 
 import main.chess.common.Constants.ColorEnum;
 import main.chess.logic.ImageUtil;
-import main.chess.model.ChessBlock;
+import main.chess.model.notPieces.ChessBlock;
 import main.chess.player.ChessPlayer;
 
 public class StatisticsPanel extends JPanel {

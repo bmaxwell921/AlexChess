@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import main.chess.logic.ChessGame;
+import main.chess.logic.legacy.ChessGame;
 
 public class StartScreen extends JPanel implements ActionListener {
 

@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import main.chess.logic.ChessGame;
+import main.chess.logic.legacy.ChessGame;
 
 public class ChessPanel extends JPanel implements ActionListener {
 

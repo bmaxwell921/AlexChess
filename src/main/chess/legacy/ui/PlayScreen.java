@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import main.chess.logic.ChessGame;
+import main.chess.logic.legacy.ChessGame;
 
 public class PlayScreen extends JPanel implements ActionListener {
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import main.chess.common.Constants.ColorEnum;
-import main.chess.model.ChessPiece;
+import main.chess.model.pieces.ChessPiece;
 
 public class ChessPlayer {
 

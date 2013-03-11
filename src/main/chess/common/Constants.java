@@ -2,6 +2,10 @@ package main.chess.common;
 
 public class Constants {
 	
+	//Board sizes
+	public static final int BOARDHEIGHT = 8;
+	public static final int BOARDWIDTH = 8;
+	
 	//Card names
 	public static final String STARTSCREEN = "Screen to start the game";
 	

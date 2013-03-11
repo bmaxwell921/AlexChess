@@ -18,14 +18,14 @@ import javax.swing.ImageIcon;
 import main.chess.common.Constants;
 import main.chess.common.Constants.ColorEnum;
 import main.chess.common.Constants.Tile;
-import main.chess.model.Bishop;
-import main.chess.model.ChessBlock;
-import main.chess.model.ChessPiece;
-import main.chess.model.King;
-import main.chess.model.Knight;
-import main.chess.model.Pawn;
-import main.chess.model.Queen;
-import main.chess.model.Rook;
+import main.chess.model.notPieces.ChessBlock;
+import main.chess.model.pieces.Bishop;
+import main.chess.model.pieces.ChessPiece;
+import main.chess.model.pieces.King;
+import main.chess.model.pieces.Knight;
+import main.chess.model.pieces.Pawn;
+import main.chess.model.pieces.Queen;
+import main.chess.model.pieces.Rook;
 
 public class ImageUtil {
 

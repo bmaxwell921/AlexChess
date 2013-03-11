@@ -1,4 +1,4 @@
-package main.chess.ui;
+package main.chess.ui.legacy;
 
 import javax.swing.Icon;
 import javax.swing.JButton;

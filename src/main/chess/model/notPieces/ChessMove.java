@@ -1,6 +1,8 @@
-package main.chess.model;
+package main.chess.model.notPieces;
 
 import java.awt.Point;
+
+import main.chess.model.pieces.ChessPiece;
 
 /**
  * A Class to box up a gamepiece and a location object

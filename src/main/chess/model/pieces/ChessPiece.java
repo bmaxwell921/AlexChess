@@ -1,4 +1,4 @@
-package main.chess.model;
+package main.chess.model.pieces;
 
 import java.awt.Point;
 import java.lang.reflect.Constructor;
@@ -6,6 +6,7 @@ import java.util.Set;
 
 import main.chess.common.Constants;
 import main.chess.common.Constants.ColorEnum;
+import main.chess.model.notPieces.Board;
 
 /**
  * A class to hold all the information about a given chess piece
@@ -26,9 +27,13 @@ public abstract class ChessPiece implements Comparable<ChessPiece> {
 	//Piece's color, black or white. If you don't understand Enums look it up or text me
 	private ColorEnum color;
 	
+	//The board the pieces are on. Used to check move and attack locations
+	protected Board board;
+	
 	protected boolean hasMoved;
 	
-	public ChessPiece(ColorEnum color, Point pos, String id, int value) {
+	public ChessPiece(Board board, ColorEnum color, Point pos, String id, int value) {
+		this.board = board;
 		this.color = color;
 		this.location = pos;
 		this.id = ((color == ColorEnum.WHITE) ? Constants.WPRE : Constants.BPRE) + id;
@@ -39,25 +44,21 @@ public abstract class ChessPiece implements Comparable<ChessPiece> {
 	 * A method to get the locations that this piece can move to, excluding locations that have other pieces at them. 
 	 *                     -----------NOTE---------------
 	 *                     This method must handle pieces blocking other pieces 
-	 * @param b 
-	 * 			the current game board
 	 * @return 
 	 * 			an array of points representing the locations on the board that can be moved to 
 	 */
-	public abstract Set<Point> getMovePositions(Board b);
+	public abstract Set<Point> getMovePositions();
 	
 	/**
 	 * A method to get all the locations OF PIECES that this piece can attack at it's current location.
 	 * 					----------NOTE----------
 	 * 					Like the getValidMoveLocations method this must handle pieces blocking
 	 * 					each other
-	 * @param b 
-	 * 			the current game board
 	 * @return
 	 * 			a set of the positions of pieces that this piece can attack. Return an empty array if there
 	 * 			aren't any. This will NOT return any NullPieces
 	 */
-	public abstract Set<Point> getAttackPositions(Board b);
+	public abstract Set<Point> getAttackPositions();
 	
 	@Override
 	public int hashCode() {

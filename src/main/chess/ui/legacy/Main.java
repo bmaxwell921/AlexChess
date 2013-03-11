@@ -1,4 +1,4 @@
-package main.chess.ui;
+package main.chess.ui.legacy;
 
 import java.awt.CardLayout;
 import java.awt.Dimension;
