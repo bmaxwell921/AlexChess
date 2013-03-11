@@ -46,27 +46,27 @@ public class ImageUtil {
 		iconMap.put(null, Arrays.asList(new String[] {Constants.WHITESQ, Constants.BLACKSQ}));
 		
 		// Bishop square
-		iconMap.put(new Bishop(ColorEnum.WHITE, null), Arrays.asList(new String[] 
+		iconMap.put(new Bishop(null, ColorEnum.WHITE, null), Arrays.asList(new String[] 
 				{Constants.WBISHPATH, Constants.BBISHPATH}));
 		
 		// King 
-		iconMap.put(new King(null, null), Arrays.asList(new String[] 
+		iconMap.put(new King(null, null, null), Arrays.asList(new String[] 
 				{Constants.WKINGPATH, Constants.BKINGPATH}));
 		
 		// Knight
-		iconMap.put(new Knight(null, null), Arrays.asList(new String[] 
+		iconMap.put(new Knight(null, null, null), Arrays.asList(new String[] 
 				{Constants.WKNIGHTPATH, Constants.BKNIGHTPATH}));
 		
 		// Pawn
-		iconMap.put(new Pawn(null, null), Arrays.asList(new String[] 
+		iconMap.put(new Pawn(null, null, null), Arrays.asList(new String[] 
 				{Constants.WPAWNPATH, Constants.BPAWNPATH}));
 		
 		// Queen
-		iconMap.put(new Queen(null, null), Arrays.asList(new String[] 
+		iconMap.put(new Queen(null, null, null), Arrays.asList(new String[] 
 				{Constants.WQUEENPATH, Constants.BQUEENPATH}));
 		
 		// Rook
-		iconMap.put(new Rook(null, null), Arrays.asList(new String[] 
+		iconMap.put(new Rook(null, null, null), Arrays.asList(new String[] 
 				{Constants.WROOKPATH, Constants.BROOKPATH}));	
 	}
 
@@ -82,40 +82,40 @@ public class ImageUtil {
 			holdSq = ImageIO.read(new File(Constants.HOLDSQ));
 			
 			im = ImageIO.read(new File(Constants.WBISHPATH));
-			imageMap.put(new Bishop(ColorEnum.WHITE, null), im);
+			imageMap.put(new Bishop(null, ColorEnum.WHITE, null), im);
 			
 			im = ImageIO.read(new File(Constants.BBISHPATH));
-			imageMap.put(new Bishop(ColorEnum.BLACK, null), im);
+			imageMap.put(new Bishop(null, ColorEnum.BLACK, null), im);
 			
 			im = ImageIO.read(new File(Constants.WKINGPATH));
-			imageMap.put(new King(ColorEnum.WHITE, null), im);
+			imageMap.put(new King(null, ColorEnum.WHITE, null), im);
 			
 			im = ImageIO.read(new File(Constants.BKINGPATH));
-			imageMap.put(new King(ColorEnum.BLACK, null), im);
+			imageMap.put(new King(null, ColorEnum.BLACK, null), im);
 			
 			im = ImageIO.read(new File(Constants.WKNIGHTPATH));
-			imageMap.put(new Knight(ColorEnum.WHITE, null), im);
+			imageMap.put(new Knight(null, ColorEnum.WHITE, null), im);
 			
 			im = ImageIO.read(new File(Constants.BKNIGHTPATH));
-			imageMap.put(new Knight(ColorEnum.BLACK, null), im);
+			imageMap.put(new Knight(null, ColorEnum.BLACK, null), im);
 			
 			im = ImageIO.read(new File(Constants.WPAWNPATH));
-			imageMap.put(new Pawn(ColorEnum.WHITE, null), im);
+			imageMap.put(new Pawn(null, ColorEnum.WHITE, null), im);
 			
 			im = ImageIO.read(new File(Constants.BPAWNPATH));
-			imageMap.put(new Pawn(ColorEnum.BLACK, null), im);
+			imageMap.put(new Pawn(null, ColorEnum.BLACK, null), im);
 			
 			im = ImageIO.read(new File(Constants.WQUEENPATH));
-			imageMap.put(new Queen(ColorEnum.WHITE, null), im);
+			imageMap.put(new Queen(null, ColorEnum.WHITE, null), im);
 			
 			im = ImageIO.read(new File(Constants.BQUEENPATH));
-			imageMap.put(new Queen(ColorEnum.BLACK, null), im);
+			imageMap.put(new Queen(null, ColorEnum.BLACK, null), im);
 			
 			im = ImageIO.read(new File(Constants.WROOKPATH));
-			imageMap.put(new Rook(ColorEnum.WHITE, null), im);
+			imageMap.put(new Rook(null, ColorEnum.WHITE, null), im);
 			
 			im = ImageIO.read(new File(Constants.BROOKPATH));
-			imageMap.put(new Rook(ColorEnum.BLACK, null), im);	
+			imageMap.put(new Rook(null, ColorEnum.BLACK, null), im);	
 		}
 		catch (IOException e) {
 			e.printStackTrace();

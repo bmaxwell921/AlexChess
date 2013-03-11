@@ -181,6 +181,31 @@ public class Board {
 		this.unsafeMovePiece(fromLocation, toLocation);
 		return captured;
 	}
+	
+	/**
+	 * A method to move a piece from a given location to a given location. 
+	 * If this movement results in capturing another piece, the captured piece
+	 * is returned.
+	 * 
+	 * ------------------------------------------------------------------------
+	 * 								The method pretty much makes
+	 * 								all the other move/capture
+	 * 								methods useless.
+	 * ------------------------------------------------------------------------
+	 * @param fromLoc
+	 * 				The location to move from
+	 * @param toLoc
+	 * 				The location to move to
+	 * @return
+	 * 			The piece that was captured, or null
+	 */
+	public ChessPiece moveAndOrCapture(Point fromLoc, Point toLoc) {
+		ChessBlock toBlock = board[toLoc.y][toLoc.x];
+		ChessPiece capped = (toBlock.getPiece() == null) ? 
+				null : (ChessPiece) toBlock.getPiece().clone();
+		this.unsafeMovePiece(fromLoc, toLoc);
+		return capped;
+	}
 
 	/**
 	 * A method to return the configuration of the board

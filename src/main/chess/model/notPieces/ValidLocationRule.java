@@ -1,6 +1,5 @@
 package main.chess.model.notPieces;
 
-import main.chess.logic.ChessGame;
 
 /**
  * A rule to check if the given chess move can be made 

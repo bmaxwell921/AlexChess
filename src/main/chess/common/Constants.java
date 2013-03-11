@@ -6,6 +6,14 @@ public class Constants {
 	public static final int BOARDHEIGHT = 8;
 	public static final int BOARDWIDTH = 8;
 	
+	//Rule info
+	public static final int MAXTURNS = 50;
+	
+	//Game state info
+	public enum GameStateEnum {
+		WHITE_NORMAL, BLACK_NORMAL, WHITE_CHECKED, BLACK_CHECKED, WHITE_CHECKMATED, BLACK_CHECKMATED
+	}
+	
 	//Card names
 	public static final String STARTSCREEN = "Screen to start the game";
 	
