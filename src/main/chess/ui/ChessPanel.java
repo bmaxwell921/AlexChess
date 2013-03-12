@@ -89,7 +89,7 @@ public class ChessPanel extends JPanel implements MouseListener {
 		super.paintComponent(g);
 		
 		/*
-		 * TODO this shouldn't happen here.
+		 * TODO this shouldn't happen here. The UI is taking forever to update
 		 * We probably want to do this like the old version and call the update
 		 * when an action is performed. Maybe get a result from the game.evaluateInput.
 		 * This result might just be a boolean tell us whether anything changed. The only
