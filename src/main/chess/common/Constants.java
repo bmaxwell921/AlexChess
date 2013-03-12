@@ -14,6 +14,9 @@ public class Constants {
 		WHITE_NORMAL, BLACK_NORMAL, WHITE_CHECKED, BLACK_CHECKED, WHITE_CHECKMATED, BLACK_CHECKMATED
 	}
 	
+	//Ui stuff
+	public static final int squareSize = 125;
+	
 	//Card names
 	public static final String STARTSCREEN = "Screen to start the game";
 	

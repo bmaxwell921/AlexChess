@@ -1,14 +1,22 @@
-package main.chess.legacy.ui;
+package main.chess.ui.legacy2;
 
 import java.awt.BorderLayout;
-import java.awt.Graphics;
+import java.awt.CardLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import main.chess.logic.legacy.ChessGame;
+import main.chess.model.notPieces.ChessBlock;
+import main.chess.player.ChessPlayer;
 
 public class PlayScreen extends JPanel implements ActionListener {
 
@@ -28,19 +36,32 @@ public class PlayScreen extends JPanel implements ActionListener {
 	private JButton save;
 	
 	/**
-	 * The game currently being played
+	 * Panel that holds the lost pieces for this game
 	 */
-	private ChessGame game;
+	private StatisticsPanel statPanel;
 	
-	public PlayScreen(ChessGame game) {
-		this.game = game;
+	/**
+	 * This panel's parent. To be used to go back to the main menu
+	 */
+	private Container parent;
+	
+	public PlayScreen(ChessGame game, Container parent) {		
+		this.parent = parent;
 		
 		this.setLayout(new BorderLayout());
+		
+		JLabel l = new JLabel("Chess", SwingConstants.CENTER);
+		l.setFont(new Font("Lucida Grand", 0, 16));
+		this.add(l, BorderLayout.PAGE_START);
 		
 		this.setUpButtons();
 		
 		//ChessPanel holds the actual board of buttons to click
-		this.add(new ChessPanel(game), BorderLayout.CENTER);
+		ChessPanel chessPanel = new ChessPanel(this, game);
+		this.add(chessPanel, BorderLayout.CENTER);
+		
+		statPanel = new StatisticsPanel();
+		this.add(statPanel, BorderLayout.EAST);
 	}
 	
 	private void setUpButtons() {
@@ -90,6 +111,14 @@ public class PlayScreen extends JPanel implements ActionListener {
 	private void saveGame() {
 		// TODO Saves the state of the game to the given file
 		
+		CardLayout lay = (CardLayout) parent.getLayout();
+		lay.previous(parent);
+		
+	}
+	
+	public void addCapturedPiece(ChessPlayer lostPlayer, ChessBlock lostPiece) {
+		statPanel.addCapturedPiece(lostPlayer, lostPiece);
+		statPanel.revalidate();
 	}
 
 }

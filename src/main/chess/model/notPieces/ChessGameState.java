@@ -46,6 +46,7 @@ public class ChessGameState {
 	 * 			True if the given piece belongs to the current player
 	 */
 	public boolean isCurrentPlayersPiece(ChessPiece piece) {
+		if (piece == null) return true;
 		if (piece.getColor() == ColorEnum.BLACK) {
 			return state == GameStateEnum.BLACK_CHECKED || state == GameStateEnum.BLACK_CHECKMATED 
 					|| state == GameStateEnum.BLACK_NORMAL;

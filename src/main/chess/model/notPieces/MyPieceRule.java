@@ -21,6 +21,6 @@ public class MyPieceRule implements IChessRule {
 	
 	@Override
 	public boolean evaluateRule(ChessMove move) {
-		return move.piece.getColor() == me.getColor();
+		return move.piece == null || move.piece.getColor() == me.getColor();
 	}
 }

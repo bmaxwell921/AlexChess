@@ -5,6 +5,7 @@ import java.util.Set;
 
 import main.chess.common.Constants.ColorEnum;
 import main.chess.model.notPieces.Board;
+import main.chess.model.notPieces.ChessBlock;
 import main.chess.model.notPieces.ChessGameState;
 import main.chess.model.notPieces.ChessMove;
 import main.chess.model.notPieces.MovingOutOfCheckRule;
@@ -164,5 +165,9 @@ public class ChessGame {
 	 */
 	public Set<Point> getSelectedPieceAttackLocs() {
 		return (state.hasSelectedPiece()) ? state.getSelectedPiece().getAttackPositions() : null;
+	}
+	
+	public ChessBlock getBlock(Point loc) {
+		return board.getBlock(loc);
 	}
 }

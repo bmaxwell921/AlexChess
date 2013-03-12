@@ -136,7 +136,7 @@ public abstract class ChessPiece implements Comparable<ChessPiece> {
 	public Object clone() {
 		Constructor cons = getClass().getConstructors()[0];
 		try {
-			return cons.newInstance(new Object[] {color, (Point) location.clone()});
+			return cons.newInstance(new Object[] {board, color, (Point) location.clone()});
 		}
 		catch (Exception e) {
 			e.printStackTrace();

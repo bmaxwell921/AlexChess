@@ -137,8 +137,8 @@ public class Board {
 	private void unsafeMovePiece(Point fromLocation, Point toLocation) {
 		board[toLocation.y][toLocation.x]
 				.setPiece(board[fromLocation.y][fromLocation.x].getPiece());
-		board[fromLocation.y][fromLocation.x].setPiece(null);
 		board[toLocation.y][toLocation.x].getPiece().move(toLocation);
+		board[fromLocation.y][fromLocation.x].setPiece(null);
 	}
 
 	/**

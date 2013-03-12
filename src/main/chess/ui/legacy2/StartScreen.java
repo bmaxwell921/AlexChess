@@ -1,19 +1,20 @@
-package main.chess.legacy.ui;
+package main.chess.ui.legacy2;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.Container;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import main.chess.common.Constants;
 import main.chess.logic.legacy.ChessGame;
 
 public class StartScreen extends JPanel implements ActionListener {
@@ -36,13 +37,13 @@ public class StartScreen extends JPanel implements ActionListener {
 	/**
 	 * The frame this panel resides in
 	 */
-	private JFrame myFrame;
+	private Container parent;
 	
 	/**
 	 * Initializes the start screen
 	 */
-	public StartScreen(JFrame f) {
-		myFrame = f;
+	public StartScreen(Container p) {
+		parent = p;
 		
 		this.setLayout(new BorderLayout());
 		
@@ -101,16 +102,11 @@ public class StartScreen extends JPanel implements ActionListener {
 	private void startNewGame() {
 		// This starts up a game with the default values for everything.
 		// Then switches the frame.contentPane() to a ChessGamePanel
-		System.out.println("Start button pressed");
+		parent.add(new PlayScreen(new ChessGame("PLAYER 1", "PLAYER 2"), 
+				parent), Constants.PLAYSCREEN);
 		
-		//TODO get the player names
-		PlayScreen play = new PlayScreen(new ChessGame("", ""));
-		
-		//Transfers the screen to the play screen
-		myFrame.getContentPane().add(play);
-		
-		this.setVisible(false);
-		myFrame.getContentPane().remove(this);
+		CardLayout lay = (CardLayout) parent.getLayout();
+		lay.next(parent);
 	}
 
 	private void exitGame() {

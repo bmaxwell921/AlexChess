@@ -1,53 +1,38 @@
 package main.chess.ui.legacy;
 
-import java.awt.CardLayout;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.Frame;
+import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
-
-import main.chess.common.Constants;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 public class Main {
 
-	private JFrame frame;
-
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+		Runnable r = new Runnable() {
 			public void run() {
-				try {
-					Main window = new Main();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				createAndShowGUI();
 			}
-		});
+		};
+		SwingUtilities.invokeLater(r);
 	}
 
-	/**
-	 * Create the application.
-	 */
-	public Main() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-//		frame.setPreferredSize(new Dimension(850, 850));
+	private static void createAndShowGUI() {
+		//Sets up the frame to view everything in
+		JFrame frame = new JFrame("Chess");
+		
+		//Makes it so when you press X it terminates the program
+		//TODO need to make sure this saves the game state
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new CardLayout(0, 0));
 		
-		frame.getContentPane().add(new StartScreen(frame.getContentPane()), Constants.STARTSCREEN);
+		JPanel startScreen = new StartScreen(frame);
 		
-		frame.setExtendedState(Frame.MAXIMIZED_BOTH);
+		//Adds the start panel to this frame so we can see it and sets the size
+		frame.getContentPane().add(startScreen);
+		frame.setLayout(new FlowLayout());
+		
+		//Makes the frame fit to the size of the panel and makes it visible
+		frame.pack();
+		frame.setVisible(true);
 	}
-
 }

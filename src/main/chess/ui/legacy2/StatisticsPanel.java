@@ -1,4 +1,4 @@
-package main.chess.ui.legacy;
+package main.chess.ui.legacy2;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
