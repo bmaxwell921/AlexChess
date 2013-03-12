@@ -83,7 +83,7 @@ public class ChessPanel extends JPanel implements MouseListener {
 		}
 		
 	}
-	
+	//test
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
