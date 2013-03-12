@@ -143,4 +143,9 @@ public abstract class ChessPiece implements Comparable<ChessPiece> {
 			return null;
 		}
 	}
+	
+	@Override
+	public String toString() {
+		return id + " at " + location;
+	}
 }

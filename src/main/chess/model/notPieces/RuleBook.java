@@ -71,7 +71,7 @@ public class RuleBook {
 	 * 			True if the move passes every rule in the book, false otherwise
 	 */
 	public boolean evaluateDynamicRules(ChessMove m) {
-		for (IChessRule rule : staticRules) {
+		for (IChessRule rule : dynamicRules) {
 			if (!rule.evaluateRule(m)) {
 				return false;
 			}

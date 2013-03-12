@@ -88,6 +88,14 @@ public class ChessPanel extends JPanel implements MouseListener {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
+		/*
+		 * TODO this shouldn't happen here.
+		 * We probably want to do this like the old version and call the update
+		 * when an action is performed. Maybe get a result from the game.evaluateInput.
+		 * This result might just be a boolean tell us whether anything changed. The only
+		 * time something doesn't change is when nothing is selected and they select an 
+		 * empty tile or a piece that isn't theirs
+		 */
 		Point selLoc = game.getSelectedPieceLoc();
 		if (selLoc != null) {
 			updateLabel(selLoc, Tile.HOLD);

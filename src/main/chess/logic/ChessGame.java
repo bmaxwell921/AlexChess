@@ -23,6 +23,8 @@ import main.chess.player.ChessPlayer;
  */
 public class ChessGame {
 	
+	private boolean DEBUGGING = true;
+	
 	/*
 	 * TODO how to handle castling and pawn promotion??
 	 */
@@ -66,7 +68,7 @@ public class ChessGame {
 		rules = new RuleBook();
 		rules.addStaticRule(new MyTurnRule(state));
 		rules.addStaticRule(new MyPieceRule(me));
-		rules.addDynamicRule(new ValidLocationRule());
+		rules.addDynamicRule(new ValidLocationRule(state));
 		rules.addDynamicRule(new MovingOutOfCheckRule(board));
 	}
 	
@@ -87,6 +89,9 @@ public class ChessGame {
 		 * just return. 
 		 */
 		if (!rules.evaluateStaticRules(curMove)) {
+			if (DEBUGGING) {
+				System.out.println("Failed a static rule check");
+			}
 			return;
 		}
 		/*
@@ -94,6 +99,9 @@ public class ChessGame {
 		 * piece for the first time, so update the state to reflect that selection
 		 */
 		else if (!state.hasSelectedPiece()) {
+			if (DEBUGGING) {
+				System.out.println("Selecting: " + curMove.piece.toString());
+			}
 			state.setSelectedPiece(curMove.piece);
 		}
 		/*
@@ -103,7 +111,10 @@ public class ChessGame {
 		 * keep it as their turn
 		 */
 		else if (!rules.evaluateDynamicRules(curMove)) {
-				state.deselectPiece();
+			if (DEBUGGING) {
+				System.out.println("Deselecting: " + state.getSelectedPiece());
+			}
+			state.deselectPiece();
 		} 
 		/*
 		 * If we get to this point then the user has made a move that is

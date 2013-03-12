@@ -9,14 +9,23 @@ package main.chess.model.notPieces;
  */
 public class ValidLocationRule implements IChessRule {
 		
+	private ChessGameState state;
+	
+	public ValidLocationRule(ChessGameState state) {
+		this.state = state;
+	}
+	
 	/**
 	 * Checks if the given location is possible to get
 	 * to from the given piece
 	 */
 	@Override
 	public boolean evaluateRule(ChessMove move) {
-		return move.piece.getMovePositions().contains(move.location) 
-				|| move.piece.getAttackPositions().contains(move.location);
+		if (!state.hasSelectedPiece()) {
+			throw new IllegalStateException("Tried to move with no selected piece");
+		}
+		return state.getSelectedPiece().getMovePositions().contains(move.location) 
+				|| state.getSelectedPiece().getAttackPositions().contains(move.location);
 	}
 
 }
