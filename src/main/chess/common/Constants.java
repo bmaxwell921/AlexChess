@@ -1,5 +1,7 @@
 package main.chess.common;
 
+import java.io.File;
+
 public class Constants {
 	
 	//Board sizes
@@ -29,29 +31,29 @@ public class Constants {
 	
 	
 	//Filepaths to images
-	public static final String WHITESQ = "Images/LightSquare.png";
-	public static final String BLACKSQ = "Images/DarkSquare.png";
-	public static final String ATTACKSQ = "Images/AttackSquare.png";
-	public static final String MOVESQ = "Images/MoveSquare.png";
-	public static final String HOLDSQ = "Images/HoldSquare.png";
+	public static final String WHITESQ = "images" + File.separator + "blocks" + File.separator + "LightSquare.png";
+	public static final String BLACKSQ = "images" + File.separator + "blocks" + File.separator + "DarkSquare.png";
+	public static final String ATTACKSQ = "images" + File.separator + "blocks" + File.separator + "AttackSquare.png";
+	public static final String MOVESQ = "images" + File.separator + "blocks" + File.separator +"MoveSquare.png";
+	public static final String HOLDSQ = "images" + File.separator + "blocks" + File.separator +"HoldSquare.png";
 	
-	public static final String WBISHPATH = "Images/WhiteBishop.png";
-	public static final String BBISHPATH = "Images/BlackBishop.png";
+	public static final String WBISHPATH = "images" + File.separator + "pieces" + File.separator + "WhiteBishop.png";
+	public static final String BBISHPATH = "images" + File.separator + "pieces" + File.separator + "BlackBishop.png";
 	
-	public static final String WKINGPATH = "Images/WhiteKing.png";
-	public static final String BKINGPATH = "Images/BlackKing.png";
+	public static final String WKINGPATH = "images" + File.separator + "pieces" + File.separator + "WhiteKing.png";
+	public static final String BKINGPATH = "images" + File.separator + "pieces" + File.separator + "BlackKing.png";
 	
-	public static final String WKNIGHTPATH = "Images/WhiteKnight.png";
-	public static final String BKNIGHTPATH = "Images/BlackKnight.png";
+	public static final String WKNIGHTPATH = "images" + File.separator + "pieces" + File.separator + "WhiteKnight.png";
+	public static final String BKNIGHTPATH = "images" + File.separator + "pieces" + File.separator + "BlackKnight.png";
 	
-	public static final String WPAWNPATH = "Images/WhitePawn.png";
-	public static final String BPAWNPATH = "Images/BlackPawn.png";
+	public static final String WPAWNPATH = "images" + File.separator + "pieces" + File.separator + "WhitePawn.png";
+	public static final String BPAWNPATH = "images" + File.separator + "pieces" + File.separator + "BlackPawn.png";
 	
-	public static final String WQUEENPATH = "Images/WhiteQueen.png";
-	public static final String BQUEENPATH = "Images/BlackQueen.png";
+	public static final String WQUEENPATH = "images" + File.separator + "pieces" + File.separator + "WhiteQueen.png";
+	public static final String BQUEENPATH = "images" + File.separator + "pieces" + File.separator + "BlackQueen.png";
 	
-	public static final String WROOKPATH = "Images/WhiteRook.png";
-	public static final String BROOKPATH = "Images/BlackRook.png";
+	public static final String WROOKPATH = "images" + File.separator + "pieces" + File.separator + "WhiteRook.png";
+	public static final String BROOKPATH = "images" + File.separator + "pieces" + File.separator + "BlackRook.png";
 	
 	//Ids for chess pieces
 	//Prepends

@@ -8,6 +8,7 @@ import main.chess.model.notPieces.Board;
 import main.chess.model.notPieces.ChessBlock;
 import main.chess.model.notPieces.ChessGameState;
 import main.chess.model.notPieces.ChessMove;
+import main.chess.model.notPieces.LocationCollection;
 import main.chess.model.notPieces.MovingOutOfCheckRule;
 import main.chess.model.notPieces.MyPieceRule;
 import main.chess.model.notPieces.MyTurnRule;
@@ -164,7 +165,7 @@ public class ChessGame {
 	 * @return
 	 * 		All the points where the selected piece can move, or null
 	 */
-	public Set<Point> getSelectedPieceMoveLocs() {
+	public LocationCollection getSelectedPieceMoveLocs() {
 		return (state.hasSelectedPiece()) ? state.getSelectedPiece().getMovePositions() : null;
 	}
 	
@@ -174,7 +175,7 @@ public class ChessGame {
 	 * @return
 	 * 			all the positions the selected piece can attack, or null
 	 */
-	public Set<Point> getSelectedPieceAttackLocs() {
+	public LocationCollection getSelectedPieceAttackLocs() {
 		return (state.hasSelectedPiece()) ? state.getSelectedPiece().getAttackPositions() : null;
 	}
 	

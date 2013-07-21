@@ -175,11 +175,12 @@ public class ChessGame {
 	 * 			the set
 	 */
 	public Set<Point> getSelectedPieceAttackPieces() {
-		Set<Point> pieces = new HashSet<Point>();
-		if (selectedPiece != null) {
-			pieces = selectedPiece.getAttackPositions();
-		}
-		return pieces;
+		return null;
+//		Set<Point> pieces = new HashSet<Point>();
+//		if (selectedPiece != null) {
+//			pieces = selectedPiece.getAttackPositions();
+//		}
+//		return pieces;
 	}
 
 	/**
@@ -189,11 +190,12 @@ public class ChessGame {
 	 * 			the set
 	 */
 	public Set<Point> getSelectedPieceMoveLocations() {
-		Set<Point> locs = new HashSet<Point>();
-		if (selectedPiece != null) {
-			locs = selectedPiece.getMovePositions();
-		}
-		return locs;
+		return null;
+//		Set<Point> locs = new HashSet<Point>();
+//		if (selectedPiece != null) {
+//			locs = selectedPiece.getMovePositions();
+//		}
+//		return locs;
 	}
 
 	/**

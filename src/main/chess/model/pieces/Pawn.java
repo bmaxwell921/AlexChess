@@ -7,6 +7,7 @@ import java.util.Set;
 import main.chess.common.Constants;
 import main.chess.common.Constants.ColorEnum;
 import main.chess.model.notPieces.Board;
+import main.chess.model.notPieces.LocationCollection;
 
 public class Pawn extends ChessPiece {
 
@@ -15,8 +16,8 @@ public class Pawn extends ChessPiece {
 	}
 
 	@Override
-	public Set<Point> getMovePositions() {
-		Set<Point> locs = new HashSet<Point>();
+	public LocationCollection getMovePositions() {
+		LocationCollection locs = new LocationCollection();
 		Point myLoc = this.getLocation();
 		for (int i = 1; i <= 2; ++i) {
 			Point toAdd = new Point(myLoc.x, myLoc.y + i
@@ -32,8 +33,8 @@ public class Pawn extends ChessPiece {
 	}
 
 	@Override
-	public Set<Point> getAttackPositions() {
-		Set<Point> locs = new HashSet<Point>();
+	public LocationCollection getAttackPositions() {
+		LocationCollection locs = new LocationCollection();
 		Point myLoc = this.getLocation();
 		Point toAdd = new Point(myLoc.x + 1, myLoc.y + 1
 				* (this.getColor() == ColorEnum.WHITE ? 1 : -1));

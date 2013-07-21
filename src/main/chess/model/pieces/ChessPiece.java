@@ -2,11 +2,11 @@ package main.chess.model.pieces;
 
 import java.awt.Point;
 import java.lang.reflect.Constructor;
-import java.util.Set;
 
 import main.chess.common.Constants;
 import main.chess.common.Constants.ColorEnum;
 import main.chess.model.notPieces.Board;
+import main.chess.model.notPieces.LocationCollection;
 
 /**
  * A class to hold all the information about a given chess piece
@@ -47,7 +47,7 @@ public abstract class ChessPiece implements Comparable<ChessPiece> {
 	 * @return 
 	 * 			an array of points representing the locations on the board that can be moved to 
 	 */
-	public abstract Set<Point> getMovePositions();
+	public abstract LocationCollection getMovePositions();
 	
 	/**
 	 * A method to get all the locations OF PIECES that this piece can attack at it's current location.
@@ -58,7 +58,7 @@ public abstract class ChessPiece implements Comparable<ChessPiece> {
 	 * 			a set of the positions of pieces that this piece can attack. Return an empty array if there
 	 * 			aren't any. This will NOT return any NullPieces
 	 */
-	public abstract Set<Point> getAttackPositions();
+	public abstract LocationCollection getAttackPositions();
 	
 	@Override
 	public int hashCode() {

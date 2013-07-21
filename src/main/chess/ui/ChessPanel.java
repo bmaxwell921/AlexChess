@@ -1,11 +1,15 @@
 package main.chess.ui;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -42,10 +46,20 @@ public class ChessPanel extends JPanel implements MouseListener {
 	 */
 	private ChessGame game;
 	
+	private int blockSize;
+	
 	public ChessPanel(ChessGame game) {
 		this.game = game;
+		this.calculateBlockSize();
 		this.setLayout(new GridLayout(Constants.BOARDHEIGHT + 1, Constants.BOARDWIDTH + 1));
 		this.setUpBoard();
+	}
+	
+	private void calculateBlockSize() {
+		//Take the screen size...use it appropriately
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		
+		blockSize = 200;
 	}
 	
 	private void setUpBoard() {
@@ -56,9 +70,14 @@ public class ChessPanel extends JPanel implements MouseListener {
 			for (int j = 0; j < Constants.BOARDWIDTH; ++j) {
 				ChessBlock block = game.getBlock(new Point(j, i));
 				
-				JLabel label = new ChessBoardLabel(ImageUtil.getBlendedIcon(block,
+//				JLabel label = new ChessBoardLabel(ImageUtil.getBlendedIcon(block,
+//						block.getBlockColor() == ColorEnum.WHITE ? Tile.WHITE : Tile.BLACK, 
+//						Constants.squareSize, Constants.squareSize), i , j);
+				JLabel label = new ChessBoardLabel(ImageUtil.getBlendedIcon(block, 
 						block.getBlockColor() == ColorEnum.WHITE ? Tile.WHITE : Tile.BLACK, 
-						Constants.squareSize, Constants.squareSize), i , j);
+						blockSize, blockSize), i, j);
+				label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+				label.setPreferredSize(new Dimension(200, 200));
 				label.addMouseListener(this);
 				tiles[i][j] = label;
 				this.add(label);

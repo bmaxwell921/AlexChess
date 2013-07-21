@@ -1,6 +1,9 @@
 package main.chess.ui;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Frame;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
@@ -30,7 +33,8 @@ public class Main {
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().add(new ChessPanel(new ChessGame()));
-		frame.pack();
+//		frame.pack();
+		frame.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frame.setVisible(true);
 	}
 }
