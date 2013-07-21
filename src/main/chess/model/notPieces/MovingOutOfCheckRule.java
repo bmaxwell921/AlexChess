@@ -21,7 +21,7 @@ public class MovingOutOfCheckRule implements IChessRule {
 	public boolean evaluateRule(ChessMove move) {
 		// TODO check if we are in check. If we aren't return true otherwise
 		// make sure the given move takes us out of check
-		return false;
+		return true;
 	}
 
 }

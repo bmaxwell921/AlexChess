@@ -1,9 +1,9 @@
 package main.chess.logic;
 
 import java.awt.Point;
-import java.util.Set;
 
 import main.chess.common.Constants.ColorEnum;
+import main.chess.common.Constants.Tile;
 import main.chess.model.notPieces.Board;
 import main.chess.model.notPieces.ChessBlock;
 import main.chess.model.notPieces.ChessGameState;
@@ -13,6 +13,8 @@ import main.chess.model.notPieces.MovingOutOfCheckRule;
 import main.chess.model.notPieces.MyPieceRule;
 import main.chess.model.notPieces.MyTurnRule;
 import main.chess.model.notPieces.RuleBook;
+import main.chess.model.notPieces.UIChange;
+import main.chess.model.notPieces.UIChangeList;
 import main.chess.model.notPieces.ValidLocationRule;
 import main.chess.model.pieces.ChessPiece;
 import main.chess.player.ChessPlayer;
@@ -79,11 +81,11 @@ public class ChessGame {
 	 * @param in
 	 * 			the location of the tile the user selected
 	 */
-	public void evaluateInput(Point in) {
+	public UIChangeList evaluateInput(Point in) {
 		//Be careful because in comes from the UI so it is
 		// y, x
 		ChessMove curMove = new ChessMove(board.getBlock(in).getPiece(), in);
-		
+		UIChangeList ret = new UIChangeList();
 		/*
 		 * If they fail to pass a static rule, it's because it's either not their turn
 		 * or they clicked on something that isn't their piece, so don't change state and 
@@ -93,7 +95,7 @@ public class ChessGame {
 			if (DEBUGGING) {
 				System.out.println("Failed a static rule check");
 			}
-			return;
+			return ret;
 		}
 		/*
 		 * Otherwise, if we don't have a selected piece they are just selecting a
@@ -103,7 +105,10 @@ public class ChessGame {
 			if (DEBUGGING) {
 				System.out.println("Selecting: " + curMove.piece.toString());
 			}
+			//Add the changes for attack and move locations
 			state.setSelectedPiece(curMove.piece);
+			this.addSelectChanges(ret, curMove);
+			return ret;
 		}
 		/*
 		 * Otherwise, they are moving their piece somewhere, so we need to evaluate
@@ -115,7 +120,10 @@ public class ChessGame {
 			if (DEBUGGING) {
 				System.out.println("Deselecting: " + state.getSelectedPiece());
 			}
+			//Need to get the UI changes before we deselect
+			this.addDeselectChanges(ret, curMove);
 			state.deselectPiece();
+			return ret;
 		} 
 		/*
 		 * If we get to this point then the user has made a move that is
@@ -124,13 +132,51 @@ public class ChessGame {
 		 */
 		else {
 			//TODO checking pawn promotion and castling will occur down here probs
-			
-			ChessPiece capped = board.moveAndOrCapture(curMove.piece.getLocation(), curMove.location);
+			this.addDeselectChanges(ret, curMove);
+			ChessPiece capped = board.moveAndOrCapture(state.getSelectedPiece().getLocation(), curMove.location);
 			if (capped != null) {
 				state.addLostPiece(capped);
 			}
 			this.updateState();
+			this.addCaptureChanges(ret, capped);
+			return ret;
 		}
+	}
+	
+	private void addSelectChanges(UIChangeList list, ChessMove move) {
+		list.addChange(new UIChange(state.getSelectedPiece().getLocation(), null, Tile.HOLD, null));
+		
+		for (Point location : state.getSelectedPiece().getAttackPositions()) {
+			list.addChange(new UIChange(location, null, Tile.ATTACK, null));
+		}
+		
+		for (Point location : state.getSelectedPiece().getMovePositions()) {
+			list.addChange(new UIChange(location, null, Tile.MOVE, null));
+		}
+	}
+	
+	private void addDeselectChanges(UIChangeList list, ChessMove move) {
+		Tile changeColor = this.getBlock(state.getSelectedPiece().getLocation()).getBlockColor() 
+				== ColorEnum.BLACK 
+				? Tile.BLACK : Tile.WHITE;
+		list.addChange(new UIChange(state.getSelectedPiece().getLocation(), null, changeColor, null));
+		
+		//Remove attack and move locations
+		for (Point location : state.getSelectedPiece().getAttackPositions()) {
+			Tile change = this.getBlock(location).getBlockColor() == ColorEnum.BLACK 
+					? Tile.BLACK : Tile.WHITE;
+			list.addChange(new UIChange(location, null, change, null));
+		}
+		
+		for (Point location : state.getSelectedPiece().getMovePositions()) {
+			Tile change = this.getBlock(location).getBlockColor() == ColorEnum.BLACK 
+					? Tile.BLACK : Tile.WHITE;
+			list.addChange(new UIChange(location, null, change, null));
+		}
+	}
+	
+	private void addCaptureChanges(UIChangeList list, ChessPiece captured) {
+		//TODO
 	}
 
 	/*

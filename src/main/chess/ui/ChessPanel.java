@@ -21,6 +21,8 @@ import main.chess.common.Constants.Tile;
 import main.chess.logic.ChessGame;
 import main.chess.logic.ImageUtil;
 import main.chess.model.notPieces.ChessBlock;
+import main.chess.model.notPieces.UIChange;
+import main.chess.model.notPieces.UIChangeList;
 
 public class ChessPanel extends JPanel implements MouseListener {
 
@@ -129,16 +131,16 @@ public class ChessPanel extends JPanel implements MouseListener {
 		 * time something doesn't change is when nothing is selected and they select an 
 		 * empty tile or a piece that isn't theirs
 		 */
-		Point selLoc = game.getSelectedPieceLoc();
-		if (selLoc != null) {
-			updateLabel(selLoc, Tile.HOLD);
-		}
+//		Point selLoc = game.getSelectedPieceLoc();
+//		if (selLoc != null) {
+//			updateLabel(selLoc, Tile.HOLD);
+//		}
 	}
 
 	private void updateLabel(Point selectedLoc, Tile type) {
 		tiles[selectedLoc.y][selectedLoc.x].setIcon(
 				ImageUtil.getBlendedIcon(game.getBlock(selectedLoc),
-				type, Constants.squareSize, Constants.squareSize));
+				type, this.blockSize, this.blockSize));
 	}
 
 
@@ -164,8 +166,20 @@ public class ChessPanel extends JPanel implements MouseListener {
 	public void mousePressed(MouseEvent event) {
 		if (event.getSource().getClass() == ChessBoardLabel.class) {
 			ChessBoardLabel source = (ChessBoardLabel) event.getSource();
-			game.evaluateInput(new Point(source.j, source.i));
+			UIChangeList list = game.evaluateInput(new Point(source.j, source.i));
+			for (UIChange change : list) {
+				this.handleChange(change);
+			}
 		}	
+	}
+
+	private void handleChange(UIChange change) {
+		if (change.sourceNeedsChange()) {
+			this.updateLabel(change.getSource(), change.getSourceTileChange());
+		}
+		if (change.destNeedsChange()) {
+			this.updateLabel(change.getDest(), change.getDestTileChange());
+		}
 	}
 
 	@Override
