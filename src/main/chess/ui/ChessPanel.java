@@ -35,6 +35,8 @@ public class ChessPanel extends JPanel implements MouseListener {
 	 */
 	private static final long serialVersionUID = 6167997664863382624L;
 
+	//Meaning 7/8th of the screen is the board and 1/8 is the info panel
+	private final float screenPortion = 7f/ 8f;
 	
 	/*
 	 * The chess board images
@@ -46,46 +48,58 @@ public class ChessPanel extends JPanel implements MouseListener {
 	 */
 	private ChessGame game;
 	
+	private JPanel boardPanel;
+	private JPanel scorePanel;
+	
 	private int blockSize;
 	
 	public ChessPanel(ChessGame game) {
 		this.game = game;
-		this.calculateBlockSize();
-		this.setLayout(new GridLayout(Constants.BOARDHEIGHT + 1, Constants.BOARDWIDTH + 1));
+		this.setupPanels();
 		this.setUpBoard();
 	}
 	
-	private void calculateBlockSize() {
+	private void setupPanels() {
 		//Take the screen size...use it appropriately
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		double minSpace = Math.min(screenSize.height, screenSize.width * screenPortion);
+		blockSize = (int) minSpace / (Constants.BOARDWIDTH + 1);
 		
-		blockSize = 200;
+		//+1 here for labels
+		boardPanel = new JPanel(new GridLayout(Constants.BOARDHEIGHT + 1, Constants.BOARDWIDTH + 1));
+		boardPanel.setPreferredSize(new Dimension((int) minSpace, screenSize.height));
+		scorePanel = new JPanel();
+		scorePanel.setPreferredSize(new Dimension((int) (screenSize.width - minSpace), 
+				screenSize.height));
+		
+		boardPanel.setBorder(BorderFactory.createLineBorder(Color.GREEN));
+		scorePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		
+		this.add(boardPanel);
+		this.add(scorePanel);
 	}
 	
 	private void setUpBoard() {
 		tiles = new JLabel[Constants.BOARDHEIGHT][Constants.BOARDWIDTH];
 		
 		for (int i = Constants.BOARDHEIGHT - 1; i >= 0; --i) {
-			this.add(new JLabel("" + (i + 1), SwingConstants.CENTER));
+			boardPanel.add(new JLabel("" + (i + 1), SwingConstants.CENTER));
 			for (int j = 0; j < Constants.BOARDWIDTH; ++j) {
 				ChessBlock block = game.getBlock(new Point(j, i));
 				
-//				JLabel label = new ChessBoardLabel(ImageUtil.getBlendedIcon(block,
-//						block.getBlockColor() == ColorEnum.WHITE ? Tile.WHITE : Tile.BLACK, 
-//						Constants.squareSize, Constants.squareSize), i , j);
 				JLabel label = new ChessBoardLabel(ImageUtil.getBlendedIcon(block, 
 						block.getBlockColor() == ColorEnum.WHITE ? Tile.WHITE : Tile.BLACK, 
 						blockSize, blockSize), i, j);
 				label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-				label.setPreferredSize(new Dimension(200, 200));
+				label.setPreferredSize(new Dimension(blockSize, blockSize));
 				label.addMouseListener(this);
 				tiles[i][j] = label;
-				this.add(label);
+				boardPanel.add(label);
 			}
 		}
 		this.add(new JLabel());
 		for (int i = 0; i < Constants.BOARDWIDTH; ++i) {
-			this.add(new JLabel("" + (char) (i + 'a'), SwingConstants.CENTER));
+			boardPanel.add(new JLabel("" + (char) (i + 'a'), SwingConstants.CENTER));
 		}
 	}
 	
@@ -147,10 +161,10 @@ public class ChessPanel extends JPanel implements MouseListener {
 	}
 
 	@Override
-	public void mousePressed(MouseEvent arg0) {
-		if (arg0.getSource().getClass() == ChessBoardLabel.class) {
-			game.evaluateInput(new Point(((ChessBoardLabel) arg0.getSource()).j, 
-					((ChessBoardLabel) arg0.getSource()).i));
+	public void mousePressed(MouseEvent event) {
+		if (event.getSource().getClass() == ChessBoardLabel.class) {
+			ChessBoardLabel source = (ChessBoardLabel) event.getSource();
+			game.evaluateInput(new Point(source.j, source.i));
 		}	
 	}
 

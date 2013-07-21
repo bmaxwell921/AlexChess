@@ -33,7 +33,7 @@ public class Main {
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().add(new ChessPanel(new ChessGame()));
-//		frame.pack();
+		frame.pack();
 		frame.setExtendedState(Frame.MAXIMIZED_BOTH);
 		frame.setVisible(true);
 	}
