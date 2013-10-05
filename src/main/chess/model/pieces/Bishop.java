@@ -16,6 +16,7 @@ public class Bishop extends ChessPiece {
 	@Override
 	public LocationCollection getMovePositions() {
 		// TODO Auto-generated method stub
+		//testing still nothing happens.
 		return null;
 	}
 
