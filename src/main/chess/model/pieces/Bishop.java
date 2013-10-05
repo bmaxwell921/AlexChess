@@ -18,13 +18,33 @@ public class Bishop extends ChessPiece {
 		LocationCollection locs = new LocationCollection();
 		Point myLoc = this.getLocation();
 		Point toAdd = new Point(myLoc);
-		for(int i = -7; i < 8; i++){
-			toAdd.setLocation(myLoc.getX() + i, myLoc.getY() + i);
-			if(!toAdd.equals(myLoc) && board.isOnBoard(toAdd) && board.getBlock(toAdd).getPiece() == null)
+		for(int i = 1; myLoc.getX() - i >= 0 && myLoc.getY() - i >= 0; i++){
+			toAdd.setLocation(myLoc.getX() - i, myLoc.getY() - i);
+			if(board.isOnBoard(toAdd) && board.getBlock(toAdd).getPiece() == null)
 				locs.add(new Point(toAdd));
+			if(board.isOnBoard(toAdd) && board.getBlock(toAdd).getPiece() != null)
+	        	break;
+		}
+		for(int i = 1; myLoc.getX() + i < 8 && myLoc.getY() + i < 8; i++){
+			toAdd.setLocation(myLoc.getX() + i, myLoc.getY() + i);
+			if(board.isOnBoard(toAdd) && board.getBlock(toAdd).getPiece() == null)
+				locs.add(new Point(toAdd));
+			if(board.isOnBoard(toAdd) && board.getBlock(toAdd).getPiece() != null)
+	        	break;
+		}
+		for(int i = 1; myLoc.getX() - i >= 0 && myLoc.getY() + i < 8; i++){
 			toAdd.setLocation(myLoc.getX() - i, myLoc.getY() + i);
 			if(!toAdd.equals(myLoc) && board.isOnBoard(toAdd) && board.getBlock(toAdd).getPiece() == null)
 				locs.add(new Point(toAdd));
+			if(board.isOnBoard(toAdd) && board.getBlock(toAdd).getPiece() != null)
+	        	break;
+		}
+		for(int i = 1; myLoc.getX() + i < 8 && myLoc.getY() - i >= 0; i++){
+			toAdd.setLocation(myLoc.getX() + i, myLoc.getY() - i);
+			if(!toAdd.equals(myLoc) && board.isOnBoard(toAdd) && board.getBlock(toAdd).getPiece() == null)
+				locs.add(new Point(toAdd));
+			if(board.isOnBoard(toAdd) && board.getBlock(toAdd).getPiece() != null)
+	        	break;
 		}
 		return locs;
 	}
@@ -34,18 +54,48 @@ public class Bishop extends ChessPiece {
 		LocationCollection locs = new LocationCollection();
 		Point myLoc = this.getLocation();
 		Point toAdd = new Point(myLoc);
-		for(int i = -7; i < 8; i++){
+		for(int i = 1; i < 8; i++){
 			toAdd.setLocation(myLoc.getX() + i, myLoc.getY() + i);
-			if(!toAdd.equals(myLoc) && board.isOnBoard(toAdd) && isOpponent(board.getBlock(toAdd).getPiece())){
-				locs.add(new Point(toAdd));
-				break;
+			if(board.isOnBoard(toAdd)){
+				if(isOpponent(board.getBlock(toAdd).getPiece())){
+					locs.add(new Point(toAdd));
+					break;
+				}
+				if(board.getBlock(toAdd).getPiece() != null)
+					break;
 			}
 		}
-		for(int i = -7; i < 8; i++){
+		for(int i = 1; i < 8; i++){
+			toAdd.setLocation(myLoc.getX() - i, myLoc.getY() - i);
+			if(board.isOnBoard(toAdd)){
+				if(isOpponent(board.getBlock(toAdd).getPiece())){
+					locs.add(new Point(toAdd));
+					break;
+				}
+				if(board.getBlock(toAdd).getPiece() != null)
+					break;
+			}
+		}
+		for(int i = 1; i < 8; i++){
 			toAdd.setLocation(myLoc.getX() - i, myLoc.getY() + i);
-			if(!toAdd.equals(myLoc) && board.isOnBoard(toAdd) && isOpponent(board.getBlock(toAdd).getPiece())){
-				locs.add(new Point(toAdd));
-				break;
+			if(board.isOnBoard(toAdd)){
+				if(isOpponent(board.getBlock(toAdd).getPiece())){
+					locs.add(new Point(toAdd));
+					break;
+				}
+				if(board.getBlock(toAdd).getPiece() != null)
+					break;
+			}
+		}
+		for(int i = 1; i < 8; i++){
+			toAdd.setLocation(myLoc.getX() + i, myLoc.getY() - i);
+			if(board.isOnBoard(toAdd)){
+				if(isOpponent(board.getBlock(toAdd).getPiece())){
+					locs.add(new Point(toAdd));
+					break;
+				}
+				if(board.getBlock(toAdd).getPiece() != null)
+					break;
 			}
 		}
 		return locs;
