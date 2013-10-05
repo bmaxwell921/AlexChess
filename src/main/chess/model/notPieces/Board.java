@@ -81,6 +81,7 @@ public class Board {
 	private void setUpKings() {
 		board[0][4].setPiece(new King(this, ColorEnum.WHITE, new Point(4,0)));
 		board[7][3].setPiece(new King(this, ColorEnum.BLACK, new Point(3,7)));
+		board[4][4].setPiece(new King(this, ColorEnum.WHITE, new Point(4,4)));
 	}
 
 	/**

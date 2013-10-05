@@ -116,6 +116,6 @@ public class Rook extends ChessPiece {
 					&& !this.isOpponent(board.getBlock(toAdd).getPiece()))
 				break;
 		}
-		return locs;//this will need Enum to make sure you only take pieces from opposite team.
+		return locs;
 	}
 }

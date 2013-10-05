@@ -15,14 +15,29 @@ public class King extends ChessPiece {
 
 	@Override
 	public LocationCollection getMovePositions() {
-		// TODO Auto-generated method stub
-		return null;
+		LocationCollection locs = new LocationCollection();
+		Point myLoc = this.getLocation();
+		Point toAdd = new Point(myLoc);
+		for(int i = -1; i < 2; i++)
+			for(int j = -1; j < 2; j++){
+				toAdd.setLocation(myLoc.getX() + i, myLoc.getY() + j);
+				if(!toAdd.equals(myLoc) && board.isOnBoard(toAdd) && board.getBlock(toAdd).getPiece() == null)
+					locs.add(new Point(toAdd));
+			}
+		return locs;
 	}
 
 	@Override
 	public LocationCollection getAttackPositions() {
-		// TODO Auto-generated method stub
-		return null;
+		LocationCollection locs = new LocationCollection();
+		Point myLoc = this.getLocation();
+		Point toAdd = new Point(myLoc);
+		for(int i = -1; i < 2; i++)
+			for(int j = -1; j < 2; j++){
+				toAdd.setLocation(myLoc.getX() + i, myLoc.getY() + j);
+				if(!toAdd.equals(myLoc) && board.isOnBoard(toAdd) && isOpponent(board.getBlock(toAdd).getPiece()))
+					locs.add(new Point(toAdd));
+			}
+		return locs;
 	}
-
 }
