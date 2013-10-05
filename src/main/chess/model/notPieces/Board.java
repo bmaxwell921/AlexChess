@@ -56,7 +56,7 @@ public class Board {
 		board[0][0].setPiece(new Rook(this, ColorEnum.WHITE, new Point(0,0)));
 		board[0][7].setPiece(new Rook(this, ColorEnum.WHITE, new Point(7,0)));
 		board[7][0].setPiece(new Rook(this, ColorEnum.BLACK, new Point(0,7)));
-		board[7][7].setPiece(new Rook(this, ColorEnum.BLACK, new Point(7,7)));
+		board[7][7].setPiece(new Rook(this, ColorEnum.BLACK, new Point(7,7)));		
 	}
 
 	private void setUpKnights() {
