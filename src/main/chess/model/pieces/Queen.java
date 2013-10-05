@@ -15,14 +15,20 @@ public class Queen extends ChessPiece {
 
 	@Override
 	public LocationCollection getMovePositions() {
-		// TODO Auto-generated method stub
-		return null;
+		LocationCollection locs = new LocationCollection();
+		Point myLoc = this.getLocation();
+		Point toAdd = new Point(myLoc);
+		
+		return locs;
 	}
 
 	@Override
 	public LocationCollection getAttackPositions() {
-		// TODO Auto-generated method stub
-		return null;
+		LocationCollection locs = new LocationCollection();
+		Point myLoc = this.getLocation();
+		Point toAdd = new Point(myLoc);
+		
+		return locs;
 	}
 
 }

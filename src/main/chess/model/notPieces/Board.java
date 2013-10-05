@@ -71,7 +71,6 @@ public class Board {
 		board[0][5].setPiece(new Bishop(this, ColorEnum.WHITE, new Point(5,0)));
 		board[7][2].setPiece(new Bishop(this, ColorEnum.BLACK, new Point(2,7)));
 		board[7][5].setPiece(new Bishop(this, ColorEnum.BLACK, new Point(5,7)));
-		board[4][4].setPiece(new Bishop(this, ColorEnum.WHITE, new Point(4,4)));//
 	}
 
 	private void setUpQueens() {
