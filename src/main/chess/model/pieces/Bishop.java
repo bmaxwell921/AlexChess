@@ -15,13 +15,39 @@ public class Bishop extends ChessPiece {
 
 	@Override
 	public LocationCollection getMovePositions() {
-		// TODO Auto-generated method stub
-		return null;
+		LocationCollection locs = new LocationCollection();
+		Point myLoc = this.getLocation();
+		Point toAdd = new Point(myLoc);
+		for(int i = -7; i < 8; i++){
+			toAdd.setLocation(myLoc.getX() + i, myLoc.getY() + i);
+			if(!toAdd.equals(myLoc) && board.isOnBoard(toAdd) && board.getBlock(toAdd).getPiece() == null)
+				locs.add(new Point(toAdd));
+			toAdd.setLocation(myLoc.getX() - i, myLoc.getY() + i);
+			if(!toAdd.equals(myLoc) && board.isOnBoard(toAdd) && board.getBlock(toAdd).getPiece() == null)
+				locs.add(new Point(toAdd));
+		}
+		return locs;
 	}
 
 	@Override
 	public LocationCollection getAttackPositions() {
-		// TODO Auto-generated method stub
-		return null;
+		LocationCollection locs = new LocationCollection();
+		Point myLoc = this.getLocation();
+		Point toAdd = new Point(myLoc);
+		for(int i = -7; i < 8; i++){
+			toAdd.setLocation(myLoc.getX() + i, myLoc.getY() + i);
+			if(!toAdd.equals(myLoc) && board.isOnBoard(toAdd) && isOpponent(board.getBlock(toAdd).getPiece())){
+				locs.add(new Point(toAdd));
+				break;
+			}
+		}
+		for(int i = -7; i < 8; i++){
+			toAdd.setLocation(myLoc.getX() - i, myLoc.getY() + i);
+			if(!toAdd.equals(myLoc) && board.isOnBoard(toAdd) && isOpponent(board.getBlock(toAdd).getPiece())){
+				locs.add(new Point(toAdd));
+				break;
+			}
+		}
+		return locs;
 	}
 }
