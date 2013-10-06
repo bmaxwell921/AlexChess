@@ -34,7 +34,6 @@ public class Board {
 			}
 			rowStartWhite = !rowStartWhite;
 		}
-		//TODO set up the pieces in their default locations
 
 
 		this.setUpPawns();
@@ -43,8 +42,17 @@ public class Board {
 		this.setUpBishops();
 		this.setUpQueens();
 		this.setUpKings();
+		//this.setUpTest();
 	}
 
+	private void setUpTest(){
+		board[4][4].setPiece(new Knight(this, ColorEnum.WHITE, new Point(4,4)));
+		board[4][3].setPiece(new Knight(this, ColorEnum.WHITE, new Point(3,4)));
+		board[7][0].setPiece(new Knight(this, ColorEnum.BLACK, new Point(0,7)));
+		board[7][7].setPiece(new Knight(this, ColorEnum.BLACK, new Point(7,7)));
+		board[0][7].setPiece(new Knight(this, ColorEnum.BLACK, new Point(7,0)));
+		board[0][0].setPiece(new Knight(this, ColorEnum.BLACK, new Point(0,0)));
+	}
 	private void setUpPawns() {
 		for (int x = 0; x <= 7; x++) {
 			board[1][x].setPiece(new Pawn(this, ColorEnum.WHITE, new Point(x, 1)));

@@ -15,14 +15,67 @@ public class Knight extends ChessPiece {
 
 	@Override
 	public LocationCollection getMovePositions() {
-		// TODO Auto-generated method stub
-		return null;
+		LocationCollection locs = new LocationCollection();
+		Point myLoc = this.getLocation();
+		Point toAdd = new Point(myLoc);
+		//Spots to try...always 8 spots.
+		toAdd.setLocation(myLoc.getX() + 1, myLoc.getY() + 2);
+		if(board.isOnBoard(toAdd) && board.getBlock(toAdd).getPiece() == null)
+			locs.add(new Point(toAdd));
+		toAdd.setLocation(myLoc.getX() + 1, myLoc.getY() - 2);
+		if(board.isOnBoard(toAdd) && board.getBlock(toAdd).getPiece() == null)
+			locs.add(new Point(toAdd));
+		toAdd.setLocation(myLoc.getX() - 1, myLoc.getY() + 2);
+		if(board.isOnBoard(toAdd) && board.getBlock(toAdd).getPiece() == null)
+			locs.add(new Point(toAdd));
+		toAdd.setLocation(myLoc.getX() - 1, myLoc.getY() - 2);
+		if(board.isOnBoard(toAdd) && board.getBlock(toAdd).getPiece() == null)
+			locs.add(new Point(toAdd));
+		toAdd.setLocation(myLoc.getX() + 2, myLoc.getY() + 1);
+		if(board.isOnBoard(toAdd) && board.getBlock(toAdd).getPiece() == null)
+			locs.add(new Point(toAdd));
+		toAdd.setLocation(myLoc.getX() + 2, myLoc.getY() - 1);
+		if(board.isOnBoard(toAdd) && board.getBlock(toAdd).getPiece() == null)
+			locs.add(new Point(toAdd));
+		toAdd.setLocation(myLoc.getX() - 2, myLoc.getY() + 1);
+		if(board.isOnBoard(toAdd) && board.getBlock(toAdd).getPiece() == null)
+			locs.add(new Point(toAdd));
+		toAdd.setLocation(myLoc.getX() - 2, myLoc.getY() - 1);
+		if(board.isOnBoard(toAdd) && board.getBlock(toAdd).getPiece() == null)
+			locs.add(new Point(toAdd));
+		return locs;
 	}
 
 	@Override
 	public LocationCollection getAttackPositions() {
-		// TODO Auto-generated method stub
-		return null;
+		LocationCollection locs = new LocationCollection();
+		Point myLoc = this.getLocation();
+		Point toAdd = new Point(myLoc);
+		toAdd.setLocation(myLoc.getX() + 1, myLoc.getY() + 2);
+		if(board.isOnBoard(toAdd) && board.getBlock(toAdd).getPiece() != null && isOpponent(board.getBlock(toAdd).getPiece()))
+			locs.add(new Point(toAdd));
+		toAdd.setLocation(myLoc.getX() + 1, myLoc.getY() - 2);
+		if(board.isOnBoard(toAdd) && board.getBlock(toAdd).getPiece() != null && isOpponent(board.getBlock(toAdd).getPiece()))
+			locs.add(new Point(toAdd));
+		toAdd.setLocation(myLoc.getX() - 1, myLoc.getY() + 2);
+		if(board.isOnBoard(toAdd) && board.getBlock(toAdd).getPiece() != null && isOpponent(board.getBlock(toAdd).getPiece()))
+			locs.add(new Point(toAdd));
+		toAdd.setLocation(myLoc.getX() - 1, myLoc.getY() - 2);
+		if(board.isOnBoard(toAdd) && board.getBlock(toAdd).getPiece() != null && isOpponent(board.getBlock(toAdd).getPiece()))
+			locs.add(new Point(toAdd));
+		toAdd.setLocation(myLoc.getX() + 2, myLoc.getY() + 1);
+		if(board.isOnBoard(toAdd) && board.getBlock(toAdd).getPiece() != null && isOpponent(board.getBlock(toAdd).getPiece()))
+			locs.add(new Point(toAdd));
+		toAdd.setLocation(myLoc.getX() + 2, myLoc.getY() - 1);
+		if(board.isOnBoard(toAdd) && board.getBlock(toAdd).getPiece() != null && isOpponent(board.getBlock(toAdd).getPiece()))
+			locs.add(new Point(toAdd));
+		toAdd.setLocation(myLoc.getX() - 2, myLoc.getY() + 1);
+		if(board.isOnBoard(toAdd) && board.getBlock(toAdd).getPiece() != null && isOpponent(board.getBlock(toAdd).getPiece()))
+			locs.add(new Point(toAdd));
+		toAdd.setLocation(myLoc.getX() - 2, myLoc.getY() - 1);
+		if(board.isOnBoard(toAdd) && board.getBlock(toAdd).getPiece() != null && isOpponent(board.getBlock(toAdd).getPiece()))
+			locs.add(new Point(toAdd));
+		return locs;
 	}
 
 }
